@@ -1,5 +1,5 @@
 # Secure-Signup
-MERN app that consists of simple signup form
+MERN app that consists of simple signup form. Uses Material UI and (potentially) SCSS for any custom styling.
 
 Three pages:
 - Landing page
@@ -13,3 +13,6 @@ Focused on thorough account setup and security:
 - Ensures both front and backend are uncompromisable
 - Provides full user feedback (such as password requirements not being met)
 - Treat as fully public repository (as though it's an open source project) and try to maintain full security despite that
+
+Begin with JSX, then incrementally convert into TSX
+Make code as reusable/minimize duplication as possible
