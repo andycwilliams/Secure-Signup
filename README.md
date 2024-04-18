@@ -2,10 +2,9 @@
 
 MERN app that consists of simple signup form. Uses Material UI and (potentially) SCSS for any custom styling.
 
-Three pages:
+Two pages:
 
-- Landing page
-- Signup page
+- Landing/Signup page
 - Successful login page
 
 Focused on thorough account setup and security:

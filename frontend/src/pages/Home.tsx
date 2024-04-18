@@ -1,4 +1,6 @@
-// // Material UI Imports
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { useState } from "react";
+// Material UI Imports
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -22,16 +24,23 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useMediaQuery, useTheme } from "@mui/material";
+// Component Imports
 import NavBar from "../components/NavBar";
 import SignIn from "../components/SignIn";
+import SignUp from "../components/SignUp";
+import Footer from "../components/Footer";
+// Axios Imports
+import axios from "axios";
 
 export const Home: React.FC = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
-    <Box>
-      Home
-      <NavBar />
-      <SignIn />
-    </Box>
+    <>
+      {/* <NavBar /> */}
+      {/* <SignIn /> */}
+      <SignUp />
+      {/* <Footer /> */}
+    </>
   );
 };
 

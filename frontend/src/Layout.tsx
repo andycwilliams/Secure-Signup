@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Route, Routes } from "react-router-dom";
-import { BrowserRouter } from "react-router-dom";
 // Material UI Imports
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
@@ -25,27 +24,29 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useMediaQuery, useTheme } from "@mui/material";
-import CssBaseline from "@mui/material/CssBaseline";
-import { ThemeProvider } from "@mui/material/styles";
-
+// Component Imports
+import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import LoggedIn from "./pages/LoggedIn";
+import NoPageFound from "./pages/NoPageFound";
 // import logo from './logo.svg';
 import "./App.css";
-import Layout from "./Layout";
-import getTheme from "./theme";
 
-const App = () => {
+const Layout: React.FC = () => {
   return (
     <>
-      <CssBaseline />
-      <ThemeProvider theme={getTheme("light")}>
-        {/* <BrowserRouter> */}
-        <Layout />
-        {/* </BrowserRouter> */}
-      </ThemeProvider>
+      <NavBar />
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/loggedin" element={<LoggedIn />} />
+          <Route path="*" element={<NoPageFound />} />
+        </Routes>
+      </main>
+      <Footer />
     </>
   );
 };
 
-export default App;
+export default Layout;
