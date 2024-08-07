@@ -39,15 +39,14 @@ const SignUp: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log("Username:", username);
-    console.log("Email:", email);
-    // Reset form fields
+    console.log("SignUp Username:", username);
+    console.log("SignUp Email:", email);
     setUsername("");
     setEmail("");
   };
 
   return (
+    
     <Box component="form" onSubmit={handleSubmit}>
       <Grid container spacing={2}>
         <Grid item xs={12}>

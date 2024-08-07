@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useState } from "react";
+import React, { useState } from "react";
 // Material UI Imports
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
@@ -34,14 +34,8 @@ import axios from "axios";
 
 export const Home: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  return (
-    <>
-      {/* <NavBar /> */}
-      {/* <SignIn /> */}
-      <SignUp />
-      {/* <Footer /> */}
-    </>
-  );
+
+  return <Container>{isLoggedIn ? <SignUp /> : <SignIn />}</Container>;
 };
 
 export default Home;
