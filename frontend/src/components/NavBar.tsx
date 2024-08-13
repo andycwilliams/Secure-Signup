@@ -33,7 +33,7 @@ import IconButton from "@mui/material/IconButton";
 const Navbar: React.FC = () => {
   return (
     <Box
-      sx={{ flexGrow: 1 }}
+      // sx={{ flexGrow: 1 }}
       // sx={{ display: "flex" }}
     >
       <AppBar position="static" component="nav">
@@ -50,9 +50,6 @@ const Navbar: React.FC = () => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Secure Signup
           </Typography>
-          {/* <Typography variant="subtitle1">Home</Typography> */}
-          {/* <Typography variant="subtitle1">About</Typography> */}
-          {/* <Typography variant="subtitle1">Contact</Typography> */}
           <Button color="inherit">Home</Button>
           <Button color="inherit">About</Button>
           <Button color="inherit">Contact</Button>

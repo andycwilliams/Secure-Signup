@@ -49,7 +49,7 @@ const SignIn: React.FC = () => {
   return (
     <Box>
       <Typography>Welcome back!</Typography>
-      <Typography>Are you new? Please create an account</Typography>
+      <Typography>Please sign in:</Typography>
       <Box component="form" onSubmit={handleSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
@@ -72,11 +72,12 @@ const SignIn: React.FC = () => {
           </Grid>
           <Grid item xs={12}>
             <Button type="submit" variant="contained" color="primary">
-              Sign Up
+              Sign In
             </Button>
           </Grid>
         </Grid>
       </Box>
+      <Button>I want to create an account</Button>
     </Box>
   );
 };

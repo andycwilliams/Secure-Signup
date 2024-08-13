@@ -26,9 +26,23 @@ import { useMediaQuery, useTheme } from "@mui/material";
 
 const Footer: React.FC = () => {
   return (
-    <Container maxWidth="md" component="footer">
-      <Typography variant="body1">Secure Signup trademark stuff</Typography>
-    </Container>
+    <Box
+      component="footer"
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        // minHeight: "100vh",
+      }}
+    >
+      <Box
+        sx={{
+          mt: "auto",
+          backgroundColor: "lightgray",
+        }}
+      >
+        <Typography variant="body1">Secure Signup trademark stuff</Typography>
+      </Box>
+    </Box>
   );
 };
 

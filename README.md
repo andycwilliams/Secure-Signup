@@ -20,3 +20,6 @@ Full test coverage
 Professional README file (with CD/CI badge and coverage percentage badge)
 Begin with JSX, then incrementally convert into TSX
 Make code as reusable/minimize duplication as possible
+
+Dark mode
+As accessible as possible (use Lighthouse, et al)

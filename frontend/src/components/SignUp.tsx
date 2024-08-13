@@ -1,53 +1,121 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
-// Material UI Imports
-import Avatar from "@mui/material/Avatar";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Checkbox from "@mui/material/Checkbox";
-import Chip from "@mui/material/Chip";
-import Container from "@mui/material/Container";
-import Divider from "@mui/material/Divider";
-import Fade from "@mui/material/Fade";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Grid from "@mui/material/Grid";
-import Link from "@mui/material/Link";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Stack from "@mui/material/Stack";
-import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
-import { useMediaQuery, useTheme } from "@mui/material";
+import {
+  Box,
+  Button,
+  Grid,
+  TextField,
+  Typography,
+} from "@mui/material";
 
 const SignUp: React.FC = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [usernameError, setUsernameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUsername(e.target.value);
+    const value = e.target.value;
+    setUsername(value);
+    if (value.length < 5) {
+      setUsernameError("Username must have at least five characters");
+    } else {
+      setUsernameError("");
+    }
   };
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
+    const value = e.target.value;
+    setEmail(value);
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(value)) {
+      setEmailError("Please enter a valid email address");
+    } else {
+      setEmailError("");
+    }
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setPassword(value);
+
+    const errors = [];
+
+    if (value.length < 8) {
+      errors.push("Password must have at least eight characters.");
+    }
+
+    if (!/[a-z]/.test(value)) {
+      errors.push("Password must include at least one lowercase letter.");
+    }
+
+    if (!/[A-Z]/.test(value)) {
+      errors.push("Password must include at least one uppercase letter.");
+    }
+
+    if (!/\d/.test(value)) {
+      errors.push("Password must include at least one digit.");
+    }
+
+    if (!/[@$!%*?&]/.test(value)) {
+      errors.push("Password must include at least one special character.");
+    }
+
+    setPasswordError(errors.join(" "));
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("SignUp Username:", username);
-    console.log("SignUp Email:", email);
-    setUsername("");
-    setEmail("");
+
+    if (username.length < 5) {
+      setUsernameError("Username must be at least 5 characters");
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setEmailError("Invalid email format");
+    }
+
+    const passwordErrors = [];
+    if (password.length < 8) {
+      passwordErrors.push("Password must be at least 8 characters long.");
+    }
+    if (!/[a-z]/.test(password)) {
+      passwordErrors.push("Password must include at least one lowercase letter.");
+    }
+    if (!/[A-Z]/.test(password)) {
+      passwordErrors.push("Password must include at least one uppercase letter.");
+    }
+    if (!/\d/.test(password)) {
+      passwordErrors.push("Password must include at least one digit.");
+    }
+    if (!/[@$!%*?&]/.test(password)) {
+      passwordErrors.push("Password must include at least one special character (@, $, !, %, *, ?, &).");
+    }
+
+    setPasswordError(passwordErrors.join(" "));
+
+    if (
+      username.length >= 5 &&
+      emailRegex.test(email) &&
+      passwordErrors.length === 0
+    ) {
+      console.log("Submitted!", { username, email, password });
+      setUsername("");
+      setEmail("");
+      setPassword("");
+      setUsernameError("");
+      setEmailError("");
+      setPasswordError("");
+    }
   };
 
   return (
-    
     <Box component="form" onSubmit={handleSubmit}>
+      <Typography>Hello!</Typography>
+      <Typography>Please create an account:</Typography>
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <TextField
@@ -56,6 +124,8 @@ const SignUp: React.FC = () => {
             variant="outlined"
             value={username}
             onChange={handleUsernameChange}
+            error={Boolean(usernameError)}
+            helperText={usernameError}
           />
         </Grid>
         <Grid item xs={12}>
@@ -65,6 +135,20 @@ const SignUp: React.FC = () => {
             variant="outlined"
             value={email}
             onChange={handleEmailChange}
+            error={Boolean(emailError)}
+            helperText={emailError}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            label="Password"
+            variant="outlined"
+            type="password"
+            value={password}
+            onChange={handlePasswordChange}
+            error={Boolean(passwordError)}
+            helperText={passwordError}
           />
         </Grid>
         <Grid item xs={12}>
@@ -73,6 +157,7 @@ const SignUp: React.FC = () => {
           </Button>
         </Grid>
       </Grid>
+      <Button>I have an account</Button>
     </Box>
   );
 };

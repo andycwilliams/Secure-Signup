@@ -35,7 +35,7 @@ import axios from "axios";
 export const Home: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  return <Container>{isLoggedIn ? <SignUp /> : <SignIn />}</Container>;
+  return <Container>{!isLoggedIn ? <SignUp /> : <SignIn />}</Container>;
 };
 
 export default Home;
