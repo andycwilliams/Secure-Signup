@@ -48,8 +48,9 @@ const SignIn: React.FC = () => {
 
   return (
     <Box>
-      <Typography>Welcome back!</Typography>
-      <Typography>Please sign in:</Typography>
+      <Typography variant="h4">Sign in</Typography>
+      <Typography variant="h5">Welcome back!</Typography>
+      <Typography variant="subtitle1">Please sign in:</Typography>
       <Box component="form" onSubmit={handleSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12}>

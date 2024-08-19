@@ -1,154 +1,196 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
-import {
-  Box,
-  Button,
-  Grid,
-  TextField,
-  Typography,
-} from "@mui/material";
+// Material UI Imports
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Checkbox from "@mui/material/Checkbox";
+import Chip from "@mui/material/Chip";
+import Container from "@mui/material/Container";
+import Divider from "@mui/material/Divider";
+import Fade from "@mui/material/Fade";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Grid from "@mui/material/Grid";
+import Link from "@mui/material/Link";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import { useMediaQuery, useTheme } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import SearchIcon from "@mui/icons-material/Search";
+import DirectionsIcon from "@mui/icons-material/Directions";
+import InputAdornment from "@mui/material/InputAdornment";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+
+const validateUsername = (username: string) =>
+  username.length < 5 ? "Username must have at least five characters" : "";
+
+const validateEmail = (email: string) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return !emailRegex.test(email) ? "Please enter a valid email address" : "";
+};
+
+const validatePassword = (password: string) => {
+  const errors = [];
+
+  if (password.length < 8) {
+    return "Password must have at least eight characters";
+  }
+
+  if (!/[a-z]/.test(password)) errors.push("one lowercase letter");
+  if (!/[A-Z]/.test(password)) errors.push("one uppercase letter");
+  if (!/\d/.test(password)) errors.push("one digit");
+  if (!/[@$!%*?&]/.test(password)) errors.push("one special character");
+
+  if (errors.length === 1) {
+    return `Password must include at least ${errors[0]}.`;
+  }
+
+  if (errors.length === 2) {
+    return `Password must include at least ${errors.join(" and ")}.`;
+  }
+
+  const lastRequirement = errors.pop();
+  return `Password must include at least ${errors.join(
+    ", "
+  )}, and ${lastRequirement}.`;
+};
 
 const SignUp: React.FC = () => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({
+    username: "ThisIsMyUsername",
+    email: "test@email.com",
+    password: "Abcd123@",
+  });
 
-  const [usernameError, setUsernameError] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
+  const [errors, setErrors] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
 
-  const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setUsername(value);
-    if (value.length < 5) {
-      setUsernameError("Username must have at least five characters");
-    } else {
-      setUsernameError("");
-    }
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
   };
 
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setEmail(value);
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(value)) {
-      setEmailError("Please enter a valid email address");
-    } else {
-      setEmailError("");
-    }
-  };
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
 
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setPassword(value);
-
-    const errors = [];
-
-    if (value.length < 8) {
-      errors.push("Password must have at least eight characters.");
+    let error = "";
+    switch (name) {
+      case "username":
+        error = validateUsername(value);
+        break;
+      case "email":
+        error = validateEmail(value);
+        break;
+      case "password":
+        error = validatePassword(value);
+        break;
     }
 
-    if (!/[a-z]/.test(value)) {
-      errors.push("Password must include at least one lowercase letter.");
-    }
-
-    if (!/[A-Z]/.test(value)) {
-      errors.push("Password must include at least one uppercase letter.");
-    }
-
-    if (!/\d/.test(value)) {
-      errors.push("Password must include at least one digit.");
-    }
-
-    if (!/[@$!%*?&]/.test(value)) {
-      errors.push("Password must include at least one special character.");
-    }
-
-    setPasswordError(errors.join(" "));
+    setErrors({ ...errors, [name]: error });
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (username.length < 5) {
-      setUsernameError("Username must be at least 5 characters");
-    }
+    const usernameError = validateUsername(formData.username);
+    const emailError = validateEmail(formData.email);
+    const passwordError = validatePassword(formData.password);
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      setEmailError("Invalid email format");
-    }
-
-    const passwordErrors = [];
-    if (password.length < 8) {
-      passwordErrors.push("Password must be at least 8 characters long.");
-    }
-    if (!/[a-z]/.test(password)) {
-      passwordErrors.push("Password must include at least one lowercase letter.");
-    }
-    if (!/[A-Z]/.test(password)) {
-      passwordErrors.push("Password must include at least one uppercase letter.");
-    }
-    if (!/\d/.test(password)) {
-      passwordErrors.push("Password must include at least one digit.");
-    }
-    if (!/[@$!%*?&]/.test(password)) {
-      passwordErrors.push("Password must include at least one special character (@, $, !, %, *, ?, &).");
-    }
-
-    setPasswordError(passwordErrors.join(" "));
-
-    if (
-      username.length >= 5 &&
-      emailRegex.test(email) &&
-      passwordErrors.length === 0
-    ) {
-      console.log("Submitted!", { username, email, password });
-      setUsername("");
-      setEmail("");
-      setPassword("");
-      setUsernameError("");
-      setEmailError("");
-      setPasswordError("");
+    if (usernameError || emailError || passwordError) {
+      setErrors({
+        username: usernameError,
+        email: emailError,
+        password: passwordError,
+      });
+    } else {
+      console.log("Submitted!", formData);
+      setFormData({ username: "", email: "", password: "" });
+      setErrors({ username: "", email: "", password: "" });
     }
   };
 
   return (
     <Box component="form" onSubmit={handleSubmit}>
-      <Typography>Hello!</Typography>
-      <Typography>Please create an account:</Typography>
+      <Typography variant="h4">Sign up</Typography>
+      <Typography variant="h5">Hello!</Typography>
+      <Typography variant="subtitle1">Please create an account:</Typography>
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <TextField
             fullWidth
+            id="register-username"
+            name="username"
             label="Username"
             variant="outlined"
-            value={username}
-            onChange={handleUsernameChange}
-            error={Boolean(usernameError)}
-            helperText={usernameError}
+            value={formData.username}
+            onChange={handleChange}
+            error={Boolean(errors.username)}
+            helperText={errors.username}
+            required
+            // margin="normal"
           />
         </Grid>
         <Grid item xs={12}>
           <TextField
             fullWidth
+            id="register-email"
+            name="email"
             label="Email"
             variant="outlined"
-            value={email}
-            onChange={handleEmailChange}
-            error={Boolean(emailError)}
-            helperText={emailError}
+            value={formData.email}
+            onChange={handleChange}
+            error={Boolean(errors.email)}
+            helperText={errors.email}
+            required
+            // margin="normal"
           />
         </Grid>
         <Grid item xs={12}>
           <TextField
             fullWidth
+            id="register-password"
+            name="password"
             label="Password"
             variant="outlined"
-            type="password"
-            value={password}
-            onChange={handlePasswordChange}
-            error={Boolean(passwordError)}
-            helperText={passwordError}
+            type={showPassword ? "text" : "password"}
+            value={formData.password}
+            onChange={handleChange}
+            error={Boolean(errors.password)}
+            helperText={errors.password}
+            required
+            // margin="normal"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    // onClick={() => setShowPassword(!showPassword)}
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
           />
         </Grid>
         <Grid item xs={12}>
