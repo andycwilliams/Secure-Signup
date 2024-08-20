@@ -181,7 +181,6 @@ const SignUp: React.FC = () => {
                 <InputAdornment position="end">
                   <IconButton
                     aria-label="toggle password visibility"
-                    // onClick={() => setShowPassword(!showPassword)}
                     onClick={handleClickShowPassword}
                     onMouseDown={handleMouseDownPassword}
                     edge="end"

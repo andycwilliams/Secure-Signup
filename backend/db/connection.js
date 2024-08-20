@@ -12,12 +12,27 @@ dotenv.config({
 
 const MONGODB_URI = process.env.MONGODB_CONNECTION;
 
-// mongoose.set("strictQuery", false);
-// mongoose.set("returnOriginal", false); //for findByAndUpdate to return a reference to object at location
+console.log("MongoDB URI:");
+console.log(MONGODB_URI);
 
-mongoose.connect(MONGODB_URI).catch((error) => {
-  console.error(`Error connecting to MongoDB: ${error.message}`);
-});
+if (!MONGODB_URI) {
+  console.error(
+    "MONGODB_CONNECTION is not defined in the environment variables."
+  );
+  process.exit(1); // Exit the process with a failure code
+}
+
+mongoose.set("strictQuery", false);
+mongoose.set("returnOriginal", false); //for findByAndUpdate to return a reference to object at location
+
+mongoose
+  .connect(MONGODB_URI)
+  .then(() => {
+    console.log("Successfully connected to MongoDB");
+  })
+  .catch((error) => {
+    console.error(`Error connecting to MongoDB: ${error.message}`);
+  });
 
 mongoose.connection.on("disconnected", () => {
   console.log("MongoDB has disconnected!");
