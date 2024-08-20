@@ -30,6 +30,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import DirectionsIcon from "@mui/icons-material/Directions";
 import InputAdornment from "@mui/material/InputAdornment";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+// Axios Imports
+import axios from "axios";
 
 const validateUsername = (username: string) =>
   username.length < 5 ? "Username must have at least five characters" : "";
@@ -106,7 +108,7 @@ const SignUp: React.FC = () => {
     setErrors({ ...errors, [name]: error });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const usernameError = validateUsername(formData.username);
@@ -120,6 +122,11 @@ const SignUp: React.FC = () => {
         password: passwordError,
       });
     } else {
+      const response = await axios.post(
+        "http://localhost:8001/users",
+        formData
+      );
+      console.log("User created successfully:", response.data);
       console.log("Submitted!", formData);
       setFormData({ username: "", email: "", password: "" });
       setErrors({ username: "", email: "", password: "" });
