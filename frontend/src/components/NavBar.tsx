@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
+import { Link as ReactRouterLink } from "react-router-dom";
 // Material UI Imports
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
@@ -33,12 +34,12 @@ import IconButton from "@mui/material/IconButton";
 const Navbar: React.FC = () => {
   return (
     <Box
-      // sx={{ flexGrow: 1 }}
-      // sx={{ display: "flex" }}
+    // sx={{ flexGrow: 1 }}
+    // sx={{ display: "flex" }}
     >
       <AppBar position="static" component="nav">
         <Toolbar>
-          <IconButton
+          {/* <IconButton
             size="large"
             edge="start"
             color="inherit"
@@ -46,13 +47,24 @@ const Navbar: React.FC = () => {
             sx={{ mr: 2 }}
           >
             <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          </IconButton> */}
+          <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
             Secure Signup
           </Typography>
-          <Button color="inherit">Home</Button>
-          <Button color="inherit">About</Button>
-          <Button color="inherit">Contact</Button>
+          <Button component={ReactRouterLink} to="/" color="inherit">
+            Home
+          </Button>
+          <Button
+            component={ReactRouterLink}
+            to="/badroute"
+            color="inherit"
+            // disabled
+          >
+            About
+          </Button>
+          <Button component={ReactRouterLink} to="/" color="inherit" disabled>
+            Contact
+          </Button>
         </Toolbar>
       </AppBar>
     </Box>

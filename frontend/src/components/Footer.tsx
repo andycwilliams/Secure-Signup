@@ -31,13 +31,14 @@ const Footer: React.FC = () => {
       sx={{
         display: "flex",
         flexDirection: "column",
-        // minHeight: "100vh",
+        alignItems: "center",
       }}
     >
       <Box
         sx={{
-          mt: "auto",
+          // mt: "auto",
           backgroundColor: "lightgray",
+          width: "100%",
         }}
       >
         <Typography variant="body1">Secure Signup trademark stuff</Typography>

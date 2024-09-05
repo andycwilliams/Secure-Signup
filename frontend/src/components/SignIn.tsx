@@ -28,22 +28,22 @@ import { useMediaQuery, useTheme } from "@mui/material";
 
 const SignIn: React.FC = () => {
   const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
   };
 
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
+  const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("SignIn Username:", username);
-    console.log("SignIn Email:", email);
+    console.log("Username:", username);
+    console.log("Password:", password);
     setUsername("");
-    setEmail("");
+    setPassword("");
   };
 
   return (
@@ -52,31 +52,31 @@ const SignIn: React.FC = () => {
       <Typography variant="h5">Welcome back!</Typography>
       <Typography variant="subtitle1">Please sign in:</Typography>
       <Box component="form" onSubmit={handleSubmit}>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              label="Username"
-              variant="outlined"
-              value={username}
-              onChange={handleUsernameChange}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              label="Email"
-              variant="outlined"
-              value={email}
-              onChange={handleEmailChange}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <Button type="submit" variant="contained" color="primary">
-              Sign In
-            </Button>
-          </Grid>
-        </Grid>
+        {/* <Grid container spacing={2}> */}
+        {/* <Grid item xs={12}> */}
+        <TextField
+          fullWidth
+          label="Username"
+          variant="outlined"
+          value={username}
+          onChange={handleUsernameChange}
+        />
+        {/* </Grid> */}
+        {/* <Grid item xs={12}> */}
+        <TextField
+          fullWidth
+          label="Password"
+          variant="outlined"
+          value={password}
+          onChange={handlePassword}
+        />
+        {/* </Grid> */}
+        {/* <Grid item xs={12}> */}
+        <Button type="submit" variant="contained" color="primary">
+          Sign In
+        </Button>
+        {/* </Grid> */}
+        {/* </Grid> */}
       </Box>
       <Button>I want to create an account</Button>
     </Box>
