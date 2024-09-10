@@ -78,15 +78,19 @@ userRouter.delete("/users/:id", async (req, res) => {
   }
 });
 
-emailVerifyRouter.get("/users/:email", async (req, res) => {
+userRouter.get("/users/:email", async (req, res) => {
   try {
     const { email } = req.params;
     const user = await UserModel.findOne({ email: email });
     if (!user) {
-      return res.status(404).send({ message: "User not found" });
+      return res
+        .status(404)
+        .send({ message: "User already registered with this email" });
     }
     res.send(user);
   } catch (error) {
+    console.log("----------------------------------------------");
+    console.log("Email already in database");
     console.error(error);
     res.status(500).send(error);
   }

@@ -139,6 +139,16 @@ const SignUp: React.FC = () => {
     const emailError = validateEmail(formData.email);
     const passwordError = validatePassword(formData.password);
 
+    // Can add a means here to prevent accessing this from a JS hack
+    // Here's a solution from "React JS Form Validation | Axios User Registration Form Submit | Beginners to Intermediate"
+    // though it does not work here:
+    // const v1 = USER_REGEX.test(user);
+    // const v2 = PWD_REGEX.test(pwd);
+    // if (!v1 || !v2) {
+    //   setErrMsg("Invalid Entry");
+    //   return;
+    // }
+
     if (usernameError || emailError || passwordError) {
       setErrors({
         username: usernameError,
@@ -206,12 +216,9 @@ const SignUp: React.FC = () => {
         <Typography component="h1" variant="h4">
           Sign up
         </Typography>
-
         {/* <Typography variant="h4">Sign up</Typography> */}
         {/* <Typography variant="h5">Hello!</Typography> */}
         {/* <Typography variant="subtitle1">Please create an account:</Typography> */}
-        {/* <Grid container spacing={2}> */}
-        {/* <Grid item xs={12}> */}
         <FormControl>
           <FormLabel htmlFor="username">Username</FormLabel>
           <TextField
@@ -230,8 +237,6 @@ const SignUp: React.FC = () => {
             // margin="normal"
           />
         </FormControl>
-        {/* </Grid> */}
-        {/* <Grid item xs={12}> */}
         <FormControl>
           <FormLabel htmlFor="email">Email</FormLabel>
           <TextField
@@ -251,8 +256,6 @@ const SignUp: React.FC = () => {
             // margin="normal"
           />
         </FormControl>
-        {/* </Grid> */}
-        {/* <Grid item xs={12}> */}
         <FormControl>
           <FormLabel htmlFor="password">Password</FormLabel>
           <TextField
@@ -285,13 +288,9 @@ const SignUp: React.FC = () => {
             }}
           />
         </FormControl>
-        {/* </Grid> */}
-        {/* <Grid item xs={12}> */}
         <Button type="submit" variant="contained" color="primary">
           Sign Up
         </Button>
-        {/* </Grid> */}
-        {/* </Grid> */}
         <Button>I have an account</Button>
         <Typography sx={{ textAlign: "center" }}>
           Already have an account?{" "}

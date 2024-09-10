@@ -33,7 +33,7 @@ import Footer from "../components/Footer";
 import axios from "axios";
 
 export const Home: React.FC = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   return <Container>{!isLoggedIn ? <SignUp /> : <SignIn />}</Container>;
 };
