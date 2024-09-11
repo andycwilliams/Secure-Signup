@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Route, Routes } from "react-router-dom";
+import { Outlet, Route, Routes } from "react-router-dom";
 // Material UI Imports
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
@@ -27,23 +27,45 @@ import { useMediaQuery, useTheme } from "@mui/material";
 // Component Imports
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+// Pages Imports
+import Admin from "./pages/Admin";
 import Home from "./pages/Home";
-import LoggedIn from "./pages/LoggedIn";
+// import LoggedIn from "./pages/LoggedIn";
 import NoPageFound from "./pages/NoPageFound";
-// import logo from './logo.svg';
+import LinkPage from "./pages/LinkPage";
+import Editor from "./pages/Editor";
+import Lounge from "./pages/Lounge";
 import "./App.css";
 
 const Layout: React.FC = () => {
   return (
     <>
       <NavBar />
-      <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/loggedin" element={<LoggedIn />} />
-          <Route path="*" element={<NoPageFound />} />
-        </Routes>
-      </main>
+      <Container>
+        <main>
+          <Routes>
+            {/* <Route path="/" element={<Layout />}> */}
+            {/* Public routes */}
+            <Route path="/signup" element={<SignIn />} />
+            <Route path="/signin" element={<SignUp />} />
+            <Route path="/linkpage" element={<LinkPage />} />
+            <Route path="/unauthorized" element={<NoPageFound />} />
+
+            {/* Protected routes */}
+            <Route path="/" element={<Home />} />
+            <Route path="/editor" element={<Editor />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/lounge" element={<Lounge />} />
+
+            {/* 404 */}
+            <Route path="*" element={<NoPageFound />} />
+            {/* </Route> */}
+          </Routes>
+          <Outlet />
+        </main>
+      </Container>
       <Footer />
     </>
   );

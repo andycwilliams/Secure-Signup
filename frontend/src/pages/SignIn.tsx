@@ -30,11 +30,15 @@ import { useMediaQuery, useTheme } from "@mui/material";
 //
 import AuthContext from "../context/AuthProvider";
 
+import axios from "../api/axios";
+
+const LOGIN_URL = "/users/login";
+
 const SignIn: React.FC = () => {
-  // TODO: Replace below quick fix with actual solution
+  // TODO: Replace below quick fix ("as any") with actual solution
   const { setAuth } = useContext(AuthContext) as any;
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("ThisIsMyUsername");
+  const [password, setPassword] = useState("Abcd123@");
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
 
@@ -42,7 +46,7 @@ const SignIn: React.FC = () => {
   const errRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
-    userRef.current?.focus(); // Focus the input field on mount
+    userRef.current?.focus();
   }, []);
 
   useEffect(() => {
@@ -57,12 +61,40 @@ const SignIn: React.FC = () => {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Username:", username);
     console.log("Password:", password);
-    setUsername("");
-    setPassword("");
+
+    try {
+      const response = await axios.post(
+        LOGIN_URL,
+        { username, password },
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      );
+      console.log(JSON.stringify(response?.data));
+      const accessToken = response?.data?.accessToken;
+      const roles = response?.data?.roles;
+      setAuth({ username, password, roles, accessToken });
+      setUsername("");
+      setPassword("");
+      setSuccess(true);
+      // TODO: Replace below quick fix ("err: any") with actual solution
+    } catch (err: any) {
+      if (!err?.response) {
+        setErrMsg("No server response");
+      } else if (err.response?.status === 400) {
+        setErrMsg("Missing username or password");
+      } else if (err.response?.status === 401) {
+        setErrMsg("Unauthorized");
+      } else {
+        setErrMsg("Login failed");
+      }
+      // errRef.current.focus();
+    }
   };
 
   return (
@@ -85,7 +117,8 @@ const SignIn: React.FC = () => {
             fullWidth
             id="username"
             name="username"
-            label="Username"
+            // label="Username"
+            placeholder="Enter your username..."
             variant="outlined"
             value={username}
             onChange={handleUsernameChange}
@@ -96,12 +129,13 @@ const SignIn: React.FC = () => {
           {/* <Grid item xs={12}> */}
         </FormControl>
         <FormControl>
-          <FormLabel htmlFor="username">Username</FormLabel>
+          <FormLabel htmlFor="password">Password</FormLabel>
           <TextField
             fullWidth
             id="password"
             name="password"
-            label="Password"
+            // label="Password"
+            placeholder="Enter your password..."
             variant="outlined"
             value={password}
             onChange={handlePassword}
@@ -122,7 +156,8 @@ const SignIn: React.FC = () => {
             className={errMsg ? "errmsg" : "offscreen"}
             aria-live="assertive"
           >
-            {errMsg}
+            vvvv
+            {errMsg}^^^^
           </p>
         </section>
       </Box>

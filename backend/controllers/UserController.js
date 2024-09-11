@@ -4,6 +4,8 @@ import mongoose from "mongoose";
 
 const userRouter = Router();
 
+// ----- SignUp routes -----
+
 userRouter.get("/users", async (req, res) => {
   try {
     const users = await UserModel.find();
@@ -78,21 +80,45 @@ userRouter.delete("/users/:id", async (req, res) => {
   }
 });
 
-userRouter.get("/users/:email", async (req, res) => {
+userRouter.get("/users/email/:email", async (req, res) => {
   try {
     const { email } = req.params;
-    const user = await UserModel.findOne({ email: email });
+    const user = await UserModel.findOne({ email });
     if (!user) {
       return res
         .status(404)
-        .send({ message: "User already registered with this email" });
+        .send({ message: "User not found with this email" });
     }
     res.send(user);
   } catch (error) {
-    console.log("----------------------------------------------");
-    console.log("Email already in database");
     console.error(error);
     res.status(500).send(error);
+  }
+});
+
+// ----- SignIn routes -----
+
+userRouter.post("/users/login", async (req, res) => {
+  try {
+    const { username, password } = req.body;
+
+    const user = await UserModel.findOne({ username });
+    if (!user) {
+      return res.status(404).send({ message: "User not found" });
+    }
+
+    const isPasswordValid = await user.comparePassword(password);
+    if (!isPasswordValid) {
+      return res.status(401).send({ message: "Invalid credentials" });
+    }
+
+    const accessToken = "exampleAccessTokenNotARealOne";
+
+    res.send({ accessToken, roles: user.roles });
+    console.log("Successfully logged in!");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: "Login failed" });
   }
 });
 

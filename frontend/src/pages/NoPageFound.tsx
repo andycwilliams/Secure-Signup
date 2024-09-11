@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // Material UI Imports
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
@@ -32,6 +32,9 @@ import DirectionsIcon from "@mui/icons-material/Directions";
 import InputAdornment from "@mui/material/InputAdornment";
 
 const NoPageFound: React.FC = () => {
+  const navigate = useNavigate();
+  const goBack = () => navigate(-1);
+
   return (
     <Box
       sx={{
@@ -71,6 +74,16 @@ const NoPageFound: React.FC = () => {
         sx={{ mt: 2 }}
       >
         Return home
+      </Button>
+      <Button
+        // component={Link}
+        // to="/"
+        variant="contained"
+        // color="primary"
+        sx={{ mt: 2 }}
+        onClick={goBack}
+      >
+        Go back
       </Button>
     </Box>
   );

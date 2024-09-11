@@ -33,7 +33,10 @@ import DirectionsIcon from "@mui/icons-material/Directions";
 import InputAdornment from "@mui/material/InputAdornment";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 // Axios Imports
-import axios, { AxiosError } from "axios";
+// import axios, { AxiosError } from "axios";
+import axios from "../api/axios";
+
+const USERS_URL = "/users";
 
 const validateUsername = (username: string) =>
   username.length < 5 ? "Username must have at least five characters" : "";
@@ -145,7 +148,7 @@ const SignUp: React.FC = () => {
     // const v1 = USER_REGEX.test(user);
     // const v2 = PWD_REGEX.test(pwd);
     // if (!v1 || !v2) {
-    //   setErrMsg("Invalid Entry");
+    //   console.log("Invalid Entry");
     //   return;
     // }
 
@@ -188,16 +191,24 @@ const SignUp: React.FC = () => {
     // }
 
     try {
-      const response = await axios.post(
-        "http://localhost:8001/users",
-        formData
-      );
+      const response = await axios.post(USERS_URL, formData, {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      });
       console.log("Account created successfully:", response.data);
+      console.log(JSON.stringify(response?.data));
 
       setFormData({ username: "", email: "", password: "" });
       setErrors({ username: "", email: "", password: "" });
-    } catch (error) {
-      console.error("Error during form submission:", error);
+    } catch (err: any) {
+      if (!err?.response) {
+        console.log("No Server Response");
+      } else if (err.response?.status === 409) {
+        console.log("Username Taken");
+      } else {
+        console.log("Registration Failed");
+      }
+
       // setErrors({
       //   username: "",
       //   email: "Server error, please try again.",
@@ -226,7 +237,7 @@ const SignUp: React.FC = () => {
             id="register-username"
             name="username"
             // label="Username"
-            placeholder="ExampleUsername"
+            placeholder="Enter a username..."
             variant="outlined"
             value={formData.username}
             onChange={handleChange}
@@ -244,7 +255,7 @@ const SignUp: React.FC = () => {
             id="register-email"
             name="email"
             // label="Email"
-            placeholder="example@gmail.com"
+            placeholder="Enter a password..."
             variant="outlined"
             value={formData.email}
             onBlur={handleIsEmailInDatabase}

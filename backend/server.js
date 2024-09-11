@@ -7,7 +7,12 @@ import "./db/connection.js";
 const app = express();
 const PORT = 8001;
 
-app.use(cors());
+const corsOptions = {
+  origin: "http://localhost:3000",
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 // app.use(logger("dev"));
 app.use(routes);

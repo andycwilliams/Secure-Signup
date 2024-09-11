@@ -54,13 +54,31 @@ const Navbar: React.FC = () => {
           <Button component={ReactRouterLink} to="/" color="inherit">
             Home
           </Button>
+          <Button component={ReactRouterLink} to="/admin" color="inherit">
+            Admin
+          </Button>
+          <Button component={ReactRouterLink} to="/editor" color="inherit">
+            Editor
+          </Button>
+          <Button component={ReactRouterLink} to="/linkpage" color="inherit">
+            LinkPage
+          </Button>
+          <Button component={ReactRouterLink} to="/lounge" color="inherit">
+            Lounge
+          </Button>
+          <Button component={ReactRouterLink} to="/signin" color="inherit">
+            Sign In
+          </Button>
+          <Button component={ReactRouterLink} to="/signup" color="inherit">
+            Sign Up
+          </Button>
           <Button
             component={ReactRouterLink}
             to="/badroute"
             color="inherit"
             // disabled
           >
-            About
+            404
           </Button>
           <Button component={ReactRouterLink} to="/" color="inherit" disabled>
             Contact

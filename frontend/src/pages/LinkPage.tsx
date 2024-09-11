@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 // Material UI Imports
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
@@ -25,52 +25,53 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useMediaQuery, useTheme } from "@mui/material";
-// Context Imports
-import AuthContext from "../context/AuthProvider";
-// Axios Imports
-import axios from "axios";
 
-export const Home: React.FC = () => {
-  const { setAuth } = useContext(AuthContext) as any;
-  const navigate = useNavigate();
-
-  const logout = async () => {
-    // if used in more components, this should be in context
-    // axios to /logout endpoint
-    setAuth({});
-    navigate("/linkpage");
-  };
-
-  // const [isLoggedIn, setIsLoggedIn] = useState(true);
-  // return <Box>{!isLoggedIn ? <SignUp /> : <SignIn />}</Box>;
+const LinkPage = () => {
   return (
     <Card>
-      <Typography>Home</Typography>
-
-      <Typography>You are logged in!</Typography>
-
-      {/* <Link to="/editor">Go to the Editor page</Link> */}
-      {/* <Link to="/admin">Go to the Admin page</Link> */}
-      {/* <Link to="/lounge">Go to the Lounge</Link> */}
-      {/* <Link to="/linkpage">Go to the link page</Link> */}
-
+      <Typography component="h1">Links</Typography>
+      <Typography component="h2">Public</Typography>
+      {/* <Link to="/login">Login</Link> */}
+      {/* <Link to="/register">Register</Link> */}
       <Button
         component={Link}
-        to="/lounge"
+        to="/signin"
         variant="contained"
         // color="primary"
         // sx={{ mt: 2 }}
       >
-        Go to the Lounge
+        Sign In
       </Button>
       <Button
         component={Link}
-        to="/editor"
+        to="/signup"
         variant="contained"
         // color="primary"
         // sx={{ mt: 2 }}
       >
-        Go to the Editor page
+        Sign Up
+      </Button>
+      <Typography component="h2">Private</Typography>
+      {/* <Link to="/">Home</Link> */}
+      {/* <Link to="/editor">Editors Page</Link> */}
+      {/* <Link to="/admin">Admin Page</Link> */}
+      <Button
+        component={Link}
+        to="/home"
+        variant="contained"
+        // color="primary"
+        // sx={{ mt: 2 }}
+      >
+        Home
+      </Button>
+      <Button
+        component={Link}
+        to="/editors"
+        variant="contained"
+        // color="primary"
+        // sx={{ mt: 2 }}
+      >
+        Editors Page
       </Button>
       <Button
         component={Link}
@@ -79,23 +80,10 @@ export const Home: React.FC = () => {
         // color="primary"
         // sx={{ mt: 2 }}
       >
-        Go to the Admin page
-      </Button>
-      <Button
-        component={Link}
-        to="/linkpage"
-        variant="contained"
-        // color="primary"
-        // sx={{ mt: 2 }}
-      >
-        Go to the link page
-      </Button>
-
-      <Button component={Link} to="/" variant="contained">
-        Log Out
+        Admin Page
       </Button>
     </Card>
   );
 };
 
-export default Home;
+export default LinkPage;
