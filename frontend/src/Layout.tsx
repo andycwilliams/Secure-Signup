@@ -27,17 +27,18 @@ import { useMediaQuery, useTheme } from "@mui/material";
 // Component Imports
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
-import SignIn from "./pages/SignIn";
-import SignUp from "./pages/SignUp";
+import RequireAuth from "./components/RequireAuth";
 // Pages Imports
 import Admin from "./pages/Admin";
 import Home from "./pages/Home";
-// import LoggedIn from "./pages/LoggedIn";
-import NoPageFound from "./pages/NoPageFound";
-import LinkPage from "./pages/LinkPage";
 import Editor from "./pages/Editor";
+import LinkPage from "./pages/LinkPage";
+// import LoggedIn from "./pages/LoggedIn";
 import Lounge from "./pages/Lounge";
-import "./App.css";
+import NoPageFound from "./pages/NoPageFound";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+// import "./App.css";
 
 const Layout: React.FC = () => {
   return (
@@ -54,10 +55,12 @@ const Layout: React.FC = () => {
             <Route path="/unauthorized" element={<NoPageFound />} />
 
             {/* Protected routes */}
-            <Route path="/" element={<Home />} />
-            <Route path="/editor" element={<Editor />} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/lounge" element={<Lounge />} />
+            <Route element={<RequireAuth />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/editors" element={<Editor />} />
+              <Route path="/admin" element={<Admin />} />
+              <Route path="/lounge" element={<Lounge />} />
+            </Route>
 
             {/* 404 */}
             <Route path="*" element={<NoPageFound />} />

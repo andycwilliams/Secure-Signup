@@ -1,6 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // React Imports
 import React, { useContext, useEffect, useRef, useState } from "react";
+import {
+  Link as ReactRouterLink,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 // Material UI Imports
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
@@ -18,7 +23,7 @@ import FormControl from "@mui/material/FormControl";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormLabel from "@mui/material/FormLabel";
 import Grid from "@mui/material/Grid";
-import Link from "@mui/material/Link";
+// import Link from "@mui/material/Link";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
@@ -28,19 +33,25 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useMediaQuery, useTheme } from "@mui/material";
 //
-import AuthContext from "../context/AuthProvider";
-
+// import AuthContext from "../context/AuthProvider";
+import useAuth from "../hooks/useAuth";
+// Axios Imports
 import axios from "../api/axios";
 
-const LOGIN_URL = "/users/login";
+// const LOGIN_URL = "/users/login";
+const LOGIN_URL = "/auth";
 
 const SignIn: React.FC = () => {
   // TODO: Replace below quick fix ("as any") with actual solution
-  const { setAuth } = useContext(AuthContext) as any;
+  const { setAuth } = useAuth() as any;
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
   const [username, setUsername] = useState("ThisIsMyUsername");
   const [password, setPassword] = useState("Abcd123@");
   const [errMsg, setErrMsg] = useState("");
-  const [success, setSuccess] = useState(false);
+  // const [success, setSuccess] = useState(false);
 
   const userRef = useRef<HTMLParagraphElement>(null);
   const errRef = useRef<HTMLParagraphElement>(null);
@@ -81,7 +92,8 @@ const SignIn: React.FC = () => {
       setAuth({ username, password, roles, accessToken });
       setUsername("");
       setPassword("");
-      setSuccess(true);
+      // setSuccess(true);
+      navigate(from, { replace: true });
       // TODO: Replace below quick fix ("err: any") with actual solution
     } catch (err: any) {
       if (!err?.response) {
@@ -112,12 +124,12 @@ const SignIn: React.FC = () => {
         {/* <Grid container spacing={2}> */}
         {/* <Grid item xs={12}> */}
         <FormControl>
-          <FormLabel htmlFor="username">Username</FormLabel>
+          {/* <FormLabel htmlFor="username">Username</FormLabel> */}
           <TextField
             fullWidth
             id="username"
             name="username"
-            // label="Username"
+            label="Username"
             placeholder="Enter your username..."
             variant="outlined"
             value={username}
@@ -129,12 +141,12 @@ const SignIn: React.FC = () => {
           {/* <Grid item xs={12}> */}
         </FormControl>
         <FormControl>
-          <FormLabel htmlFor="password">Password</FormLabel>
+          {/* <FormLabel htmlFor="password">Password</FormLabel> */}
           <TextField
             fullWidth
             id="password"
             name="password"
-            // label="Password"
+            label="Password"
             placeholder="Enter your password..."
             variant="outlined"
             value={password}

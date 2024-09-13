@@ -57,7 +57,7 @@ const Navbar: React.FC = () => {
           <Button component={ReactRouterLink} to="/admin" color="inherit">
             Admin
           </Button>
-          <Button component={ReactRouterLink} to="/editor" color="inherit">
+          <Button component={ReactRouterLink} to="/editors" color="inherit">
             Editor
           </Button>
           <Button component={ReactRouterLink} to="/linkpage" color="inherit">
@@ -79,9 +79,6 @@ const Navbar: React.FC = () => {
             // disabled
           >
             404
-          </Button>
-          <Button component={ReactRouterLink} to="/" color="inherit" disabled>
-            Contact
           </Button>
         </Toolbar>
       </AppBar>

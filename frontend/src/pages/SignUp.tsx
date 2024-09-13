@@ -231,12 +231,12 @@ const SignUp: React.FC = () => {
         {/* <Typography variant="h5">Hello!</Typography> */}
         {/* <Typography variant="subtitle1">Please create an account:</Typography> */}
         <FormControl>
-          <FormLabel htmlFor="username">Username</FormLabel>
+          {/* <FormLabel htmlFor="username">Username</FormLabel> */}
           <TextField
             fullWidth
             id="register-username"
             name="username"
-            // label="Username"
+            label="Username"
             placeholder="Enter a username..."
             variant="outlined"
             value={formData.username}
@@ -249,12 +249,12 @@ const SignUp: React.FC = () => {
           />
         </FormControl>
         <FormControl>
-          <FormLabel htmlFor="email">Email</FormLabel>
+          {/* <FormLabel htmlFor="email">Email</FormLabel> */}
           <TextField
             fullWidth
             id="register-email"
             name="email"
-            // label="Email"
+            label="Email"
             placeholder="Enter a password..."
             variant="outlined"
             value={formData.email}
@@ -268,12 +268,12 @@ const SignUp: React.FC = () => {
           />
         </FormControl>
         <FormControl>
-          <FormLabel htmlFor="password">Password</FormLabel>
+          {/* <FormLabel htmlFor="password">Password</FormLabel> */}
           <TextField
             fullWidth
             id="register-password"
             name="password"
-            // label="Password"
+            label="Password"
             placeholder="********"
             variant="outlined"
             type={showPassword ? "text" : "password"}
