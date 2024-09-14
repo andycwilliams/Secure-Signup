@@ -4,9 +4,8 @@ import mongoose from "mongoose";
 
 const userRouter = Router();
 
-// ----- SignUp routes -----
-
-userRouter.get("/users", async (req, res) => {
+userRouter.get("/", async (req, res) => {
+  console.log("ALL users = GET");
   try {
     const users = await UserModel.find();
     res.send(users);
@@ -15,9 +14,11 @@ userRouter.get("/users", async (req, res) => {
   }
 });
 
-userRouter.get("/users/:id", async (req, res) => {
+userRouter.get("/:id", async (req, res) => {
+  console.log("Single user = GET");
   try {
     const { id } = req.params;
+    console.log(id);
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).send({ message: "Invalid user ID" });
     }
@@ -32,19 +33,7 @@ userRouter.get("/users/:id", async (req, res) => {
   }
 });
 
-userRouter.post("/users", async (req, res) => {
-  try {
-    const userData = req.body;
-    const newUser = new UserModel(userData);
-    await newUser.save();
-    res.status(201).send(newUser);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send(error);
-  }
-});
-
-userRouter.put("/users/:id", async (req, res) => {
+userRouter.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -63,7 +52,7 @@ userRouter.put("/users/:id", async (req, res) => {
   }
 });
 
-userRouter.delete("/users/:id", async (req, res) => {
+userRouter.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -80,7 +69,7 @@ userRouter.delete("/users/:id", async (req, res) => {
   }
 });
 
-userRouter.get("/users/email/:email", async (req, res) => {
+userRouter.get("/email/:email", async (req, res) => {
   try {
     const { email } = req.params;
     const user = await UserModel.findOne({ email });
@@ -93,32 +82,6 @@ userRouter.get("/users/email/:email", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).send(error);
-  }
-});
-
-// ----- SignIn routes -----
-
-userRouter.post("/users/login", async (req, res) => {
-  try {
-    const { username, password } = req.body;
-
-    const user = await UserModel.findOne({ username });
-    if (!user) {
-      return res.status(404).send({ message: "User not found" });
-    }
-
-    const isPasswordValid = await user.comparePassword(password);
-    if (!isPasswordValid) {
-      return res.status(401).send({ message: "Invalid credentials" });
-    }
-
-    const accessToken = "exampleAccessTokenNotARealOne";
-
-    res.send({ accessToken, roles: user.roles });
-    console.log("Successfully logged in!");
-  } catch (error) {
-    console.error(error);
-    res.status(500).send({ message: "Login failed" });
   }
 });
 
