@@ -2,10 +2,9 @@ import { Router } from "express";
 import UserModel from "../models/UserModel.js";
 import mongoose from "mongoose";
 
-const userRouter = Router();
+const userController = Router();
 
-userRouter.get("/", async (req, res) => {
-  console.log("ALL users = GET");
+userController.get("/", async (req, res) => {
   try {
     const users = await UserModel.find();
     res.send(users);
@@ -14,11 +13,9 @@ userRouter.get("/", async (req, res) => {
   }
 });
 
-userRouter.get("/:id", async (req, res) => {
-  console.log("Single user = GET");
+userController.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(id);
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).send({ message: "Invalid user ID" });
     }
@@ -33,7 +30,7 @@ userRouter.get("/:id", async (req, res) => {
   }
 });
 
-userRouter.put("/:id", async (req, res) => {
+userController.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -52,7 +49,7 @@ userRouter.put("/:id", async (req, res) => {
   }
 });
 
-userRouter.delete("/:id", async (req, res) => {
+userController.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -69,7 +66,7 @@ userRouter.delete("/:id", async (req, res) => {
   }
 });
 
-userRouter.get("/email/:email", async (req, res) => {
+userController.get("/email/:email", async (req, res) => {
   try {
     const { email } = req.params;
     const user = await UserModel.findOne({ email });
@@ -85,4 +82,4 @@ userRouter.get("/email/:email", async (req, res) => {
   }
 });
 
-export default userRouter;
+export default userController;

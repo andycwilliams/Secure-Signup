@@ -1,10 +1,11 @@
 import express from "express";
 import cors from "cors";
 import corsOptions from "./config/corsOptions.js";
+import verifyJWT from "./middleware/verifyJWT.js";
 // import routes from "./routes/router.js";
 // import employeeRoutes from "./routes/api/employees.js";
 import userRoutes from "./routes/api/users.js";
-// import authRoutes from "./routes/auth.js";
+import authRoutes from "./routes/auth.js";
 // import refreshRoutes from "./routes/refresh.js";
 // import signoutRoutes from "./routes/signout.js";
 import signupRoutes from "./routes/signup.js";
@@ -21,7 +22,7 @@ app.use(express.json());
 
 // app.use(routes);
 
-// app.use("/auth", authRoutes);
+app.use("/auth", authRoutes);
 // app.use("/refresh", refreshRoutes);
 // app.use("/signout", signoutRoutes);
 app.use("/signup", signupRoutes);

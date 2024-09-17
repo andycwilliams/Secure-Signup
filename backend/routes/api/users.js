@@ -1,9 +1,11 @@
 import express from "express";
 import userController from "../../controllers/UserController.js";
+import verifyJWT from "../../middleware/verifyJWT.js";
 
 const userRouter = express.Router();
 
 userRouter.get("/", userController); // Maps to GET /users
+// userRouter.route("/").get(verifyJWT, userController); // Maps to GET /users
 userRouter.get("/:id", userController); // Maps to GET /users/:id
 userRouter.get("/email/:email", userController); // Maps to GET /users/email/:email
 userRouter.put("/:id", userController); // Maps to PUT /users/:id
