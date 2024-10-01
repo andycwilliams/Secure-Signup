@@ -1,10 +1,10 @@
 import { Router } from "express";
 import EmployeeModel from "../models/EmployeeModel.js";
-// import mongoose from "mongoose";
 
-const employeeRouter = Router();
+const employeeController = Router();
 
-employeeRouter.get("/employees", async (req, res) => {
+employeeController.get("/", async (req, res) => {
+  console.log("Getting all employees...");
   try {
     const employees = await EmployeeModel.find();
     res.send(employees);
@@ -13,4 +13,4 @@ employeeRouter.get("/employees", async (req, res) => {
   }
 });
 
-export default employeeRouter;
+export default employeeController;

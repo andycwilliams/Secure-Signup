@@ -3,6 +3,6 @@ import signoutController from "../controllers/SignoutController.js";
 
 const signoutRouter = express.Router();
 
-signoutRouter.post("/", signoutController);
+signoutRouter.get("/", signoutController);
 
 export default signoutRouter;

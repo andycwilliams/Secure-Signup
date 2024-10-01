@@ -6,9 +6,10 @@ const verifyJWT = (req, res, next) => {
   console.log("Request headers:", req.headers);
 
   const authHeader = req.headers.authorization || req.headers.Authorization;
+  // const authHeader = req.headers["authorization"];
   console.log("...verifying authorization...");
 
-  console.log("Bearer token: ");
+  console.log("Bearer token:");
   console.log(authHeader);
 
   if (!authHeader?.startsWith("Bearer ")) return res.sendStatus(401);
@@ -23,9 +24,11 @@ const verifyJWT = (req, res, next) => {
       return res.sendStatus(403);
     }
 
-    console.log("...continuing jwt.verify...");
+    console.log("decoded:");
+    console.log(decoded);
     console.log("Route being called is:");
-    req.user = decoded.username;
+    req.user = decoded.UserInfo.username;
+    req.roles = decoded.UserInfo.roles;
     next();
     console.log("...jwt.verify complete!");
   });

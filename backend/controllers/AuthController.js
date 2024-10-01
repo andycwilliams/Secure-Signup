@@ -30,14 +30,21 @@ authController.post("/", async (req, res) => {
 
   if (matchUser) {
     // console.log("User matches!");
-    // const roles = Object.values(foundUser.roles).filter(Boolean);
+    const roles = Object.values(foundUser.roles).filter(Boolean);
 
     const accessToken = jwt.sign(
-      { username: foundUser.username },
+      {
+        UserInfo: {
+          username: foundUser.username,
+          roles: roles,
+        },
+      },
       process.env.ACCESS_TOKEN_SECRET,
       { expiresIn: "60m" }
     );
     console.log("Access token: ", accessToken);
+    // No need to send roles in the refresh token
+    // It's only here to verify we can get a new access token
     const refreshToken = jwt.sign(
       { username: foundUser.username },
       process.env.REFRESH_TOKEN_SECRET,
@@ -59,14 +66,14 @@ authController.post("/", async (req, res) => {
     // });
     res.cookie("jwt", refreshToken, {
       httpOnly: true,
-      secure: true,
+      // secure: true,
       // secure: process.env.NODE_ENV === "production",
       sameSite: "None",
       maxAge: 24 * 60 * 60 * 1000,
     });
 
-    res.json({ success: `User ${username} is logged in!`, accessToken });
-    // res.json({ roles, accessToken });
+    // res.json({ success: `User ${username} is logged in!`, accessToken });
+    res.json({ roles, accessToken });
   } else {
     res.sendStatus(401);
     console.log("Login unsuccessful...");

@@ -162,7 +162,7 @@ const SignIn: React.FC = () => {
         {/* </Grid> */}
         {/* </Grid> */}
         <Button>I want to create an account</Button>
-        <section>
+        <Box>
           <p
             ref={errRef}
             className={errMsg ? "errmsg" : "offscreen"}
@@ -171,7 +171,7 @@ const SignIn: React.FC = () => {
             vvvv
             {errMsg}^^^^
           </p>
-        </section>
+        </Box>
       </Box>
     </Card>
   );

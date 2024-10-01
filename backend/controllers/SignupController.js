@@ -5,15 +5,15 @@ import bcrypt from "bcrypt";
 const signupController = Router();
 
 signupController.post("/", async (req, res) => {
-  const userData = req.body;
+  const { user, password } = req.body;
 
-  if (!userData.username || !userData.password)
+  if (!user || !password)
     return res
       .status(400)
       .json({ message: "Username and password are required." });
 
   const duplicateCheck = await UserModel.findOne({
-    username: userData.username,
+    username: user,
   }).exec();
   if (duplicateCheck)
     return res.status(409).json({ message: "User already exists." });
@@ -21,9 +21,14 @@ signupController.post("/", async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(userData.password, 10);
 
-    userData.password = hashedPassword;
+    // userData.password = hashedPassword;
 
-    const newUser = new UserModel(userData);
+    // const newUser = new UserModel(userData);
+    const newUser = {
+      username: user,
+      roles: { User: 101 },
+      password: hashedPassword,
+    };
     await newUser.save();
     res
       .status(201)
