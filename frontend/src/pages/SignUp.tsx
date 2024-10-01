@@ -218,101 +218,142 @@ const SignUp: React.FC = () => {
   };
 
   return (
-    <Card variant="outlined">
-      <Box
-        component="form"
-        onSubmit={handleSubmit}
-        sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+    <Stack
+      sx={{
+        padding: 20,
+        marginTop: "10vh",
+        // "&::before": {
+        //   content: '""',
+        //   display: "block",
+        //   position: "absolute",
+        //   zIndex: -1,
+        //   inset: 0,
+        // },
+      }}
+    >
+      <Card
+        variant="outlined"
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignSelf: "center",
+          width: "100%",
+          padding: 4,
+          gap: 2,
+          margin: "auto",
+        }}
       >
-        <Typography component="h1" variant="h4">
+        <Typography
+          component="h1"
+          variant="h4"
+          sx={{ width: "100%", fontSize: "clamp(2rem, 10vw, 2.15rem)" }}
+        >
           Sign up
         </Typography>
-        {/* <Typography variant="h4">Sign up</Typography> */}
-        {/* <Typography variant="h5">Hello!</Typography> */}
-        {/* <Typography variant="subtitle1">Please create an account:</Typography> */}
-        <FormControl>
-          {/* <FormLabel htmlFor="username">Username</FormLabel> */}
-          <TextField
-            fullWidth
-            id="register-username"
-            name="username"
-            label="Username"
-            placeholder="Enter a username..."
-            variant="outlined"
-            value={formData.username}
-            onChange={handleChange}
-            error={Boolean(errors.username)}
-            helperText={errors.username}
-            required
-            autoComplete="username"
-            // margin="normal"
-          />
-        </FormControl>
-        <FormControl>
-          {/* <FormLabel htmlFor="email">Email</FormLabel> */}
-          <TextField
-            fullWidth
-            id="register-email"
-            name="email"
-            label="Email"
-            placeholder="Enter a password..."
-            variant="outlined"
-            value={formData.email}
-            onBlur={handleIsEmailInDatabase}
-            onChange={handleChange}
-            error={Boolean(errors.email)}
-            helperText={errors.email}
-            required
-            autoComplete="email"
-            // margin="normal"
-          />
-        </FormControl>
-        <FormControl>
-          {/* <FormLabel htmlFor="password">Password</FormLabel> */}
-          <TextField
-            fullWidth
-            id="register-password"
-            name="password"
-            label="Password"
-            placeholder="********"
-            variant="outlined"
-            type={showPassword ? "text" : "password"}
-            value={formData.password}
-            onChange={handleChange}
-            error={Boolean(errors.password)}
-            helperText={errors.password}
-            required
-            // margin="normal"
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge="end"
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
-        </FormControl>
-        <Button type="submit" variant="contained" color="primary">
-          Sign Up
-        </Button>
-        <Button>I have an account</Button>
-        <Typography sx={{ textAlign: "center" }}>
-          Already have an account?{" "}
-          <span>
-            <Link href="/signin" variant="body2" sx={{ alignSelf: "center" }}>
-              Sign in
-            </Link>
-          </span>
-        </Typography>
-      </Box>
-    </Card>
+        <Box
+          component="form"
+          onSubmit={handleSubmit}
+          // sx={{
+          // display: "flex",
+          // flexDirection: "column",
+          // gap: 2,
+          // alignItems: "center",
+          // }}
+          noValidate
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            width: "100%",
+            gap: 2,
+          }}
+        >
+          {/* <Typography variant="h4">Sign up</Typography> */}
+          {/* <Typography variant="h5">Hello!</Typography> */}
+          {/* <Typography variant="subtitle1">Please create an account:</Typography> */}
+          <FormControl>
+            {/* <FormLabel htmlFor="username">Username</FormLabel> */}
+            <TextField
+              fullWidth
+              id="register-username"
+              name="username"
+              label="Username"
+              placeholder="Enter a username..."
+              variant="outlined"
+              value={formData.username}
+              onChange={handleChange}
+              error={Boolean(errors.username)}
+              helperText={errors.username}
+              required
+              autoComplete="username"
+              // margin="normal"
+            />
+          </FormControl>
+          <FormControl>
+            {/* <FormLabel htmlFor="email">Email</FormLabel> */}
+            <TextField
+              fullWidth
+              id="register-email"
+              name="email"
+              label="Email"
+              placeholder="Enter a password..."
+              variant="outlined"
+              value={formData.email}
+              onBlur={handleIsEmailInDatabase}
+              onChange={handleChange}
+              error={Boolean(errors.email)}
+              helperText={errors.email}
+              required
+              autoComplete="email"
+              // margin="normal"
+            />
+          </FormControl>
+          <FormControl>
+            {/* <FormLabel htmlFor="password">Password</FormLabel> */}
+            <TextField
+              fullWidth
+              id="register-password"
+              name="password"
+              label="Password"
+              placeholder="********"
+              variant="outlined"
+              type={showPassword ? "text" : "password"}
+              value={formData.password}
+              onChange={handleChange}
+              error={Boolean(errors.password)}
+              helperText={errors.password}
+              required
+              // margin="normal"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </FormControl>
+          <Button type="submit" variant="contained" color="primary">
+            Sign Up
+          </Button>
+          <Button>I have an account</Button>
+          <Typography sx={{ textAlign: "center" }}>
+            Already have an account?{" "}
+            <span>
+              <Link href="/signin" variant="body2" sx={{ alignSelf: "center" }}>
+                Sign in
+              </Link>
+            </span>
+          </Typography>
+        </Box>
+      </Card>
+    </Stack>
   );
 };
 

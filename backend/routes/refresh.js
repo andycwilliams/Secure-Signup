@@ -1,8 +1,8 @@
 import express from "express";
-import refreshController from "../controllers/RefreshController";
+import refreshTokenController from "../controllers/RefreshTokenController.js";
 
 const refreshRouter = express.Router();
 
-refreshRouter.get("/", refreshController);
+refreshRouter.get("/", refreshTokenController);
 
 export default refreshRouter;

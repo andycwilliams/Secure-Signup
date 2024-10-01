@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 const userController = Router();
 
 userController.get("/", async (req, res) => {
+  console.log("Getting all users...");
   try {
     const users = await UserModel.find();
     res.send(users);
@@ -14,6 +15,7 @@ userController.get("/", async (req, res) => {
 });
 
 userController.get("/:id", async (req, res) => {
+  console.log("Getting user by ID");
   try {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -31,6 +33,7 @@ userController.get("/:id", async (req, res) => {
 });
 
 userController.put("/:id", async (req, res) => {
+  console.log("Updating user by ID");
   try {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -50,6 +53,7 @@ userController.put("/:id", async (req, res) => {
 });
 
 userController.delete("/:id", async (req, res) => {
+  console.log("Deleting user by ID");
   try {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -67,6 +71,7 @@ userController.delete("/:id", async (req, res) => {
 });
 
 userController.get("/email/:email", async (req, res) => {
+  console.log("Getting user by email");
   try {
     const { email } = req.params;
     const user = await UserModel.findOne({ email });
