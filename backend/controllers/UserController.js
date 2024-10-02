@@ -33,7 +33,7 @@ userController.get("/:id", async (req, res) => {
 });
 
 userController.put("/:id", async (req, res) => {
-  console.log("Updating user by ID...");
+  console.log("Putting user by ID...");
   try {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {

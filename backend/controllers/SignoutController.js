@@ -1,10 +1,9 @@
 import { Router } from "express";
 import UserModel from "../models/UserModel.js";
-import jwt from "jsonwebtoken";
 
 const signoutController = Router();
 
-signoutController.post("/", async (req, res) => {
+signoutController.get("/", async (req, res) => {
   console.log("----- signoutController called -----");
 
   // Deleting access token on client
@@ -18,22 +17,23 @@ signoutController.post("/", async (req, res) => {
   // Is refresh token in DB?
   const foundUser = await UserModel.findOne({ refreshToken }).exec();
   if (!foundUser) {
-    res.clearCookie("jwt", {
-      httpOnly: true,
-      secure: "true",
-      sameSite: "None",
-    });
+    res.clearCookie("jwt", { httpOnly: true, sameSite: "None", secure: true });
     return res.sendStatus(204);
   }
 
   // Delete refresh token in DB
-  const otherUsers = await UserModel.find(
-    (user) => user.refreshToken !== foundUser.refreshToken
-  );
-  const currentUser = { ...foundUser, refreshToken: "" };
+  foundUser.refreshToken = "";
+  const result = await foundUser.save();
+  console.log("result:");
+  console.log(result);
 
-  // res.clearCookie('jwt', {httpOnly: true})
-  // res-sendStatus(204)
+  // const otherUsers = await UserModel.find(
+  // (user) => user.refreshToken !== foundUser.refreshToken
+  // );
+  // const currentUser = { ...foundUser, refreshToken: "" };
+
+  res.clearCookie("jwt", { httpOnly: true, sameSite: "None", secure: true });
+  res.sendStatus(204);
 
   console.log("----- signoutController ended -----");
 });

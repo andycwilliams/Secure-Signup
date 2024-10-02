@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 
 const refreshTokenController = Router();
 
-refreshTokenController.post("/", async (req, res) => {
+refreshTokenController.get("/", async (req, res) => {
   console.log("----- refreshTokenController called -----");
 
   const cookies = req.cookies;
@@ -32,7 +32,6 @@ refreshTokenController.post("/", async (req, res) => {
       { expiresIn: "60s" } // Good for testing, production should be longer (e.g. 15 minutes or more)
     );
     res.json({ roles, accessToken });
-    // res.json({ accessToken });
   });
 
   console.log("----- refreshTokenController ended -----");
