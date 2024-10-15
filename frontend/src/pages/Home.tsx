@@ -41,18 +41,11 @@ export const Home: React.FC = () => {
     navigate("/linkpage");
   };
 
-  // const [isLoggedIn, setIsLoggedIn] = useState(true);
-  // return <Box>{!isLoggedIn ? <SignUp /> : <SignIn />}</Box>;
   return (
     <Card>
       <Typography>Home</Typography>
 
       <Typography>You are logged in!</Typography>
-
-      {/* <Link to="/editor">Go to the Editor page</Link> */}
-      {/* <Link to="/admin">Go to the Admin page</Link> */}
-      {/* <Link to="/lounge">Go to the Lounge</Link> */}
-      {/* <Link to="/linkpage">Go to the link page</Link> */}
 
       <Button
         component={Link}

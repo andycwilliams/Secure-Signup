@@ -33,41 +33,51 @@ import Admin from "./pages/Admin";
 import Home from "./pages/Home";
 import Editor from "./pages/Editor";
 import LinkPage from "./pages/LinkPage";
-// import LoggedIn from "./pages/LoggedIn";
 import Lounge from "./pages/Lounge";
 import NoPageFound from "./pages/NoPageFound";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
-// import "./App.css";
 
 const Layout: React.FC = () => {
+  const theme = useTheme();
+
   return (
     <>
       <NavBar />
-      <Container>
-        <main>
-          <Routes>
-            {/* <Route path="/" element={<Layout />}> */}
-            {/* Public routes */}
-            <Route path="/signup" element={<SignIn />} />
-            <Route path="/signin" element={<SignUp />} />
-            <Route path="/linkpage" element={<LinkPage />} />
-            <Route path="/unauthorized" element={<NoPageFound />} />
+      <Container
+        component="main"
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          // alignSelf: "center",
+          alignItems: "center",
+          // width: "50vw",
+          // minWidth: "50vw",
+          // maxWidth: "50vw",
+          padding: 4,
+          // gap: 2,
+          // margin: "auto",
+        }}
+      >
+        <Routes>
+          {/* Public routes */}
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/linkpage" element={<LinkPage />} />
+          <Route path="/unauthorized" element={<NoPageFound />} />
 
-            {/* Protected routes */}
-            <Route element={<RequireAuth />}>
-              <Route path="/" element={<Home />} />
-              <Route path="/editors" element={<Editor />} />
-              <Route path="/admin" element={<Admin />} />
-              <Route path="/lounge" element={<Lounge />} />
-            </Route>
+          {/* Protected routes */}
+          <Route element={<RequireAuth />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/editors" element={<Editor />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/lounge" element={<Lounge />} />
+          </Route>
 
-            {/* 404 */}
-            <Route path="*" element={<NoPageFound />} />
-            {/* </Route> */}
-          </Routes>
-          <Outlet />
-        </main>
+          {/* 404 */}
+          <Route path="*" element={<NoPageFound />} />
+        </Routes>
+        <Outlet />
       </Container>
       <Footer />
     </>

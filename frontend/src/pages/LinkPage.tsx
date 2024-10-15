@@ -28,71 +28,74 @@ import { useMediaQuery, useTheme } from "@mui/material";
 
 const LinkPage = () => {
   return (
-    <Card
-      sx={{
-        // height: "100%",
-        // padding: 4,
-        display: "flex",
-        flexDirection: "column",
-        gap: 2,
-      }}
-    >
-      {/* <Box></Box> */}
-      <Typography component="h1">Links</Typography>
-      <Typography component="h2">Public</Typography>
-      {/* <Link to="/login">Login</Link> */}
-      {/* <Link to="/register">Register</Link> */}
+    <Card variant="outlined">
       <Stack>
-        <Button
-          component={Link}
-          to="/signin"
-          variant="outlined"
-          // color="primary"
-          // sx={{ mt: 2 }}
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            // width: "100%",
+            gap: 2,
+            padding: 4,
+          }}
         >
-          Sign In
-        </Button>
-        <Button
-          component={Link}
-          to="/signup"
-          variant="outlined"
-          // color="primary"
-          // sx={{ mt: 2 }}
-        >
-          Sign Up
-        </Button>
+          <Typography component="h1" variant="h4">
+            Links
+          </Typography>
+          <Typography component="h2" variant="h5">
+            Public
+          </Typography>
 
-        <Typography component="h2">Private</Typography>
-        {/* <Link to="/">Home</Link> */}
-        {/* <Link to="/editor">Editors Page</Link> */}
-        {/* <Link to="/admin">Admin Page</Link> */}
-        <Button
-          component={Link}
-          to="/"
-          variant="outlined"
-          // color="primary"
-          // sx={{ mt: 2 }}
-        >
-          Home
-        </Button>
-        <Button
-          component={Link}
-          to="/editors"
-          variant="outlined"
-          // color="primary"
-          // sx={{ mt: 2 }}
-        >
-          Editors Page
-        </Button>
-        <Button
-          component={Link}
-          to="/admin"
-          variant="outlined"
-          // color="primary"
-          // sx={{ mt: 2 }}
-        >
-          Admin Page
-        </Button>
+          <Button
+            component={Link}
+            to="/signin"
+            variant="outlined"
+            // color="primary"
+            // sx={{ mt: 2 }}
+          >
+            Sign In
+          </Button>
+          <Button
+            component={Link}
+            to="/signup"
+            variant="outlined"
+            // color="primary"
+            // sx={{ mt: 2 }}
+          >
+            Sign Up
+          </Button>
+
+          <Typography component="h2" variant="h5">
+            Private
+          </Typography>
+          <Button
+            component={Link}
+            to="/"
+            variant="outlined"
+            // color="primary"
+            // sx={{ mt: 2 }}
+          >
+            Home
+          </Button>
+          <Button
+            component={Link}
+            to="/editors"
+            variant="outlined"
+            // color="primary"
+            // sx={{ mt: 2 }}
+          >
+            Editors Page
+          </Button>
+          <Button
+            component={Link}
+            to="/admin"
+            variant="outlined"
+            // color="primary"
+            // sx={{ mt: 2 }}
+          >
+            Admin Page
+          </Button>
+        </Box>
       </Stack>
     </Card>
   );

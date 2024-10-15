@@ -111,68 +111,66 @@ const SignIn: React.FC = () => {
 
   return (
     <Card variant="outlined">
-      <Box
-        component="form"
-        onSubmit={handleSubmit}
-        sx={{ display: "flex", flexDirection: "column", gap: 2 }}
-      >
-        <Typography component="h1" variant="h4">
-          Sign in
-        </Typography>
-        {/* <Typography variant="h5">Welcome back!</Typography> */}
-        {/* <Typography variant="subtitle1">Please sign in:</Typography> */}
-        {/* <Grid container spacing={2}> */}
-        {/* <Grid item xs={12}> */}
-        <FormControl>
-          {/* <FormLabel htmlFor="username">Username</FormLabel> */}
-          <TextField
-            fullWidth
-            id="username"
-            name="username"
-            label="Username"
-            placeholder="Enter your username..."
-            variant="outlined"
-            value={username}
-            onChange={handleUsernameChange}
-            required
-            autoComplete="username"
-          />
-          {/* </Grid> */}
-          {/* <Grid item xs={12}> */}
-        </FormControl>
-        <FormControl>
-          {/* <FormLabel htmlFor="password">Password</FormLabel> */}
-          <TextField
-            fullWidth
-            id="password"
-            name="password"
-            label="Password"
-            placeholder="Enter your password..."
-            variant="outlined"
-            value={password}
-            onChange={handlePassword}
-            required
-          />
-          {/* </Grid> */}
-          {/* <Grid item xs={12}> */}
-        </FormControl>
-        <Button type="submit" variant="contained" color="primary">
-          Sign In
-        </Button>
-        {/* </Grid> */}
-        {/* </Grid> */}
-        <Button>I want to create an account</Button>
-        <Box>
-          <p
-            ref={errRef}
-            className={errMsg ? "errmsg" : "offscreen"}
-            aria-live="assertive"
-          >
-            vvvv
-            {errMsg}^^^^
-          </p>
+      <Stack>
+        <Box
+          component="form"
+          onSubmit={handleSubmit}
+          // noValidate
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            // width: "100%",
+            gap: 2,
+            padding: 4,
+          }}
+        >
+          <Typography component="h1" variant="h4">
+            Sign in
+          </Typography>
+          <FormControl>
+            <TextField
+              fullWidth
+              id="username"
+              name="username"
+              label="Username"
+              placeholder="Enter your username..."
+              variant="outlined"
+              value={username}
+              onChange={handleUsernameChange}
+              required
+              autoComplete="username"
+            />
+          </FormControl>
+          <FormControl>
+            <TextField
+              fullWidth
+              id="password"
+              name="password"
+              label="Password"
+              placeholder="Enter your password..."
+              variant="outlined"
+              value={password}
+              onChange={handlePassword}
+              required
+            />
+          </FormControl>
+          <Button type="submit" variant="contained" color="primary">
+            Sign In
+          </Button>
+          <Button>Create an account</Button>
+          {/* TODO: Remove below after tests */}
+          <Box>
+            <p
+              ref={errRef}
+              className={errMsg ? "errmsg" : "offscreen"}
+              aria-live="assertive"
+            >
+              vvvv
+              {errMsg}^^^^
+            </p>
+          </Box>
         </Box>
-      </Box>
+      </Stack>
     </Card>
   );
 };

@@ -43,6 +43,8 @@ import IconButton from "@mui/material/IconButton";
 const Navbar: React.FC = () => {
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAuth(event.target.checked);
@@ -63,93 +65,128 @@ const Navbar: React.FC = () => {
     >
       <AppBar position="static" component="nav">
         <Toolbar>
-          {/* <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton> */}
           <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
             Secure Signup
           </Typography>
-          <Button component={ReactRouterLink} to="/" color="inherit">
-            Home
-          </Button>
-          <Button component={ReactRouterLink} to="/admin" color="inherit">
-            Admin
-          </Button>
-          <Button component={ReactRouterLink} to="/editors" color="inherit">
-            Editor
-          </Button>
-          <Button component={ReactRouterLink} to="/linkpage" color="inherit">
-            LinkPage
-          </Button>
-          <Button component={ReactRouterLink} to="/lounge" color="inherit">
-            Lounge
-          </Button>
-          <Button component={ReactRouterLink} to="/signin" color="inherit">
-            Sign In
-          </Button>
-          <Button component={ReactRouterLink} to="/signup" color="inherit">
-            Sign Up
-          </Button>
-          <Button
-            component={ReactRouterLink}
-            to="/badroute"
-            color="inherit"
-            // disabled
-          >
-            404
-          </Button>
-          <IconButton
-            size="large"
-            aria-label="account of current user"
-            aria-controls="menu-appbar"
-            aria-haspopup="true"
-            onClick={handleMenu}
-            color="inherit"
-          >
-            <AccountCircle />
-          </IconButton>
-          <Menu
-            id="menu-appbar"
-            anchorEl={anchorEl}
-            anchorOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-          >
-            <MenuItem onClick={handleClose}>Profile</MenuItem>
-            <MenuItem onClick={handleClose}>My account</MenuItem>
-            <ReactRouterLink
-              to="/badroute"
-              style={{
-                textDecoration: "none",
-                // color: theme.palette.primary.main,
-                color: "inherit",
-              }}
-            >
-              <MenuItem
-                component={Button}
-                onClick={handleClose}
-                // startIcon={<ContactsIcon sx={iconSize} />}
-                // sx={iconStyling}
+          {/* Desktop navbar */}
+          {!isSmallScreen ? (
+            <>
+              <Button component={ReactRouterLink} to="/" color="inherit">
+                Home
+              </Button>
+              <Button component={ReactRouterLink} to="/admin" color="inherit">
+                Admin
+              </Button>
+              <Button component={ReactRouterLink} to="/editors" color="inherit">
+                Editor
+              </Button>
+              <Button
+                component={ReactRouterLink}
+                to="/linkpage"
+                color="inherit"
               >
-                404
-              </MenuItem>
-            </ReactRouterLink>
-            <Divider />
-          </Menu>
+                LinkPage
+              </Button>
+              <Button component={ReactRouterLink} to="/lounge" color="inherit">
+                Lounge
+              </Button>
+              <Button component={ReactRouterLink} to="/signin" color="inherit">
+                Sign In
+              </Button>
+              <Button component={ReactRouterLink} to="/signup" color="inherit">
+                Sign Up
+              </Button>
+            </>
+          ) : (
+            <>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleClose}>
+                  <Button component={ReactRouterLink} to="/" color="inherit">
+                    Home
+                  </Button>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <Button
+                    component={ReactRouterLink}
+                    to="/admin"
+                    color="inherit"
+                  >
+                    Admin
+                  </Button>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <Button
+                    component={ReactRouterLink}
+                    to="/editors"
+                    color="inherit"
+                  >
+                    Editor
+                  </Button>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <Button
+                    component={ReactRouterLink}
+                    to="/linkpage"
+                    color="inherit"
+                  >
+                    LinkPage
+                  </Button>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <Button
+                    component={ReactRouterLink}
+                    to="/lounge"
+                    color="inherit"
+                  >
+                    Lounge
+                  </Button>
+                </MenuItem>
+                <Divider />
+                <MenuItem onClick={handleClose}>
+                  <Button
+                    component={ReactRouterLink}
+                    to="/signin"
+                    color="inherit"
+                  >
+                    Sign In
+                  </Button>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <Button
+                    component={ReactRouterLink}
+                    to="/signup"
+                    color="inherit"
+                  >
+                    Sign Up
+                  </Button>
+                </MenuItem>
+              </Menu>
+            </>
+          )}
         </Toolbar>
       </AppBar>
     </Box>

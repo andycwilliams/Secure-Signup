@@ -11,8 +11,8 @@ const verifyRoles = (...allowedRoles) => {
       .map((role) => rolesArray.includes(role))
       .find((value) => value === true);
     if (!result) return res.sendStatus(401);
-    next();
     console.log("----- verifyRoles ended -----");
+    next();
   };
 };
 

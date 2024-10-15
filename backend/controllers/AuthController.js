@@ -9,19 +9,19 @@ authController.post("/", async (req, res) => {
   console.log("----- authController called -----");
   // console.log(req.body);
   // const { id, username, email, password } = req.body;
-  const { user, pwd } = req.body;
+  const { username, password } = req.body;
   // console.log(id, username, email, password);
 
-  if (!user || !pwd)
+  if (!username || !password)
     return res
       .status(400)
       .json({ message: "Username and password are required." });
 
-  const foundUser = await UserModel.findOne({ username: user }).exec();
+  const foundUser = await UserModel.findOne({ username: username }).exec();
   if (!foundUser) return res.sendStatus(401);
   console.log("User found!", foundUser);
 
-  const matchUser = await bcrypt.compare(pwd, foundUser.password);
+  const matchUser = await bcrypt.compare(password, foundUser.password);
 
   if (matchUser) {
     console.log("User matches!");

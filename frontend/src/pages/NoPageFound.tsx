@@ -36,56 +36,53 @@ const NoPageFound: React.FC = () => {
   const goBack = () => navigate(-1);
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        p: 10,
-      }}
-    >
-      <Box sx={{}}>
-        <Typography
-          variant="h2"
-          // component="h2"
+    <Card>
+      <Stack>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            // width: "100%",
+            gap: 2,
+            padding: 4,
+          }}
+        >
+          <Typography
+            component="h1"
+            variant="h4"
+            // gutterBottom
+          >
+            404: Page Not Found
+          </Typography>
+          <Typography
+          // variant="body1"
           // gutterBottom
-        >
-          404
-        </Typography>
-        <Typography
-        // variant="h4"
-        // component="h2"
-        // gutterBottom
-        >
-          Page Not Found
-        </Typography>
-        <Typography
-        // variant="body1"
-        // gutterBottom
-        >
-          Sorry, but the page you're looking for is not here.
-        </Typography>
-      </Box>
-      <Button
-        component={Link}
-        to="/"
-        variant="contained"
-        // color="primary"
-        sx={{ mt: 2 }}
-      >
-        Return home
-      </Button>
-      <Button
-        // component={Link}
-        // to="/"
-        variant="contained"
-        // color="primary"
-        sx={{ mt: 2 }}
-        onClick={goBack}
-      >
-        Go back
-      </Button>
-    </Box>
+          >
+            Sorry, but the page you're looking for is not here.
+          </Typography>
+
+          <Button
+            component={Link}
+            to="/"
+            variant="contained"
+            // color="primary"
+            sx={{ mt: 2 }}
+          >
+            Return home
+          </Button>
+          <Button
+            // component={Link}
+            // to="/"
+            variant="contained"
+            // color="primary"
+            sx={{ mt: 2 }}
+            onClick={goBack}
+          >
+            Go back
+          </Button>
+        </Box>
+      </Stack>
+    </Card>
   );
 };
 

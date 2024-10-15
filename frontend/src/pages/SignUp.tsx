@@ -218,60 +218,24 @@ const SignUp: React.FC = () => {
   };
 
   return (
-    <Stack
-      sx={{
-        padding: 20,
-        marginTop: "10vh",
-        // "&::before": {
-        //   content: '""',
-        //   display: "block",
-        //   position: "absolute",
-        //   zIndex: -1,
-        //   inset: 0,
-        // },
-      }}
-    >
-      <Card
-        variant="outlined"
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignSelf: "center",
-          width: "100%",
-          padding: 4,
-          gap: 2,
-          margin: "auto",
-        }}
-      >
-        <Typography
-          component="h1"
-          variant="h4"
-          sx={{ width: "100%", fontSize: "clamp(2rem, 10vw, 2.15rem)" }}
-        >
-          Sign up
-        </Typography>
+    <Card variant="outlined">
+      <Stack>
         <Box
           component="form"
           onSubmit={handleSubmit}
-          // sx={{
-          // display: "flex",
-          // flexDirection: "column",
-          // gap: 2,
-          // alignItems: "center",
-          // }}
           noValidate
           sx={{
             display: "flex",
             flexDirection: "column",
-            width: "100%",
+            // width: "100%",
             gap: 2,
+            padding: 4,
           }}
         >
-          {/* <Typography variant="h4">Sign up</Typography> */}
-          {/* <Typography variant="h5">Hello!</Typography> */}
-          {/* <Typography variant="subtitle1">Please create an account:</Typography> */}
+          <Typography component="h1" variant="h4">
+            Sign up
+          </Typography>
           <FormControl>
-            {/* <FormLabel htmlFor="username">Username</FormLabel> */}
             <TextField
               fullWidth
               id="register-username"
@@ -289,7 +253,6 @@ const SignUp: React.FC = () => {
             />
           </FormControl>
           <FormControl>
-            {/* <FormLabel htmlFor="email">Email</FormLabel> */}
             <TextField
               fullWidth
               id="register-email"
@@ -308,7 +271,6 @@ const SignUp: React.FC = () => {
             />
           </FormControl>
           <FormControl>
-            {/* <FormLabel htmlFor="password">Password</FormLabel> */}
             <TextField
               fullWidth
               id="register-password"
@@ -352,8 +314,8 @@ const SignUp: React.FC = () => {
             </span>
           </Typography>
         </Box>
-      </Card>
-    </Stack>
+      </Stack>
+    </Card>
   );
 };
 

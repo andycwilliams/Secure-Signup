@@ -16,6 +16,7 @@ import "./db/connection.js";
 const app = express();
 const PORT = 8001;
 
+// Handle credentials before CORS and fetch cookies credentials requirement
 app.use(credentials);
 
 app.use(cors(corsOptions));

@@ -23,3 +23,6 @@ Make code as reusable/minimize duplication as possible
 
 Dark mode
 As accessible as possible (use Lighthouse, et al)
+
+Some guidance from:
+https://github.com/gitdagray/mongo_async_crud
