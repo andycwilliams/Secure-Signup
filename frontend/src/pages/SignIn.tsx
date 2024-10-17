@@ -48,8 +48,8 @@ const SignIn: React.FC = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
-  const [username, setUsername] = useState("ThisIsMyUsername");
-  const [password, setPassword] = useState("Abcd123@");
+  const [username, setUsername] = useState("TestNewAccountAlsoAnAdmin");
+  const [password, setPassword] = useState("TestAccount#12345@");
   const [errMsg, setErrMsg] = useState("");
   // const [success, setSuccess] = useState(false);
 

@@ -49,24 +49,24 @@ const Layout: React.FC = () => {
         sx={{
           display: "flex",
           flexDirection: "column",
-          // alignSelf: "center",
           alignItems: "center",
+          padding: 4,
+          // alignSelf: "center",
           // width: "50vw",
           // minWidth: "50vw",
           // maxWidth: "50vw",
-          padding: 4,
           // gap: 2,
           // margin: "auto",
         }}
       >
-        <Routes>
-          {/* Public routes */}
+        {/* <Routes>
+          Public routes
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/linkpage" element={<LinkPage />} />
           <Route path="/unauthorized" element={<NoPageFound />} />
 
-          {/* Protected routes */}
+          Protected routes
           <Route element={<RequireAuth />}>
             <Route path="/" element={<Home />} />
             <Route path="/editors" element={<Editor />} />
@@ -74,9 +74,9 @@ const Layout: React.FC = () => {
             <Route path="/lounge" element={<Lounge />} />
           </Route>
 
-          {/* 404 */}
+          404
           <Route path="*" element={<NoPageFound />} />
-        </Routes>
+        </Routes> */}
         <Outlet />
       </Container>
       <Footer />

@@ -19,6 +19,7 @@ const PORT = 8001;
 // Handle credentials before CORS and fetch cookies credentials requirement
 app.use(credentials);
 
+// app.use(cors());
 app.use(cors(corsOptions));
 
 // Handle urlencoded form data

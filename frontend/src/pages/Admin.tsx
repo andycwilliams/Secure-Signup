@@ -26,13 +26,13 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useMediaQuery, useTheme } from "@mui/material";
 
+import Users from "../components/Users";
+
 const Admin = () => {
   return (
     <Card>
       <Typography component="h1">Admins Page</Typography>
-      <Typography component="h2">
-        You must have been assigned an Admin role.
-      </Typography>
+      <Users />
       <Box className="flexGrow">
         <Link to="/">Home</Link>
       </Box>

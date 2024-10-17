@@ -7,7 +7,7 @@ const authController = Router();
 
 authController.post("/", async (req, res) => {
   console.log("----- authController called -----");
-  // console.log(req.body);
+  console.log("Request body:", req.body);
   // const { id, username, email, password } = req.body;
   const { username, password } = req.body;
   // console.log(id, username, email, password);
