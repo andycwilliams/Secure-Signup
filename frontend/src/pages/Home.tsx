@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+// React Imports
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 // Material UI Imports
@@ -27,66 +28,87 @@ import Typography from "@mui/material/Typography";
 import { useMediaQuery, useTheme } from "@mui/material";
 // Context Imports
 import AuthContext from "../context/AuthProvider";
+// Hooks Imports
+import useLogout from "../hooks/useLogout";
 // Axios Imports
 import axios from "axios";
 
 export const Home: React.FC = () => {
-  const { setAuth } = useContext(AuthContext) as any;
+  // const { setAuth } = useContext(AuthContext) as any;
   const navigate = useNavigate();
+  const logout = useLogout();
 
-  const logout = async () => {
-    // if used in more components, this should be in context
-    // axios to /logout endpoint
-    setAuth({});
+  const signOut = async () => {
+    // setAuth({});
+    await logout();
     navigate("/linkpage");
   };
 
   return (
     <Card>
-      <Typography>Home</Typography>
+      <Stack>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            // width: "100%",
+            gap: 2,
+            padding: 4,
+          }}
+        >
+          <Typography component="h1" variant="h4">
+            Home
+          </Typography>
 
-      <Typography>You are logged in!</Typography>
+          <Typography>You are logged in!</Typography>
 
-      <Button
-        component={Link}
-        to="/lounge"
-        variant="contained"
-        // color="primary"
-        // sx={{ mt: 2 }}
-      >
-        Go to the Lounge
-      </Button>
-      <Button
-        component={Link}
-        to="/editor"
-        variant="contained"
-        // color="primary"
-        // sx={{ mt: 2 }}
-      >
-        Go to the Editor page
-      </Button>
-      <Button
-        component={Link}
-        to="/admin"
-        variant="contained"
-        // color="primary"
-        // sx={{ mt: 2 }}
-      >
-        Go to the Admin page
-      </Button>
-      <Button
-        component={Link}
-        to="/linkpage"
-        variant="contained"
-        // color="primary"
-        // sx={{ mt: 2 }}
-      >
-        Go to the link page
-      </Button>
+          <Button
+            component={Link}
+            to="/lounge"
+            variant="contained"
+            // color="primary"
+            // sx={{ mt: 2 }}
+          >
+            Lounge
+          </Button>
+          <Button
+            component={Link}
+            to="/editor"
+            variant="contained"
+            // color="primary"
+            // sx={{ mt: 2 }}
+          >
+            Editor page
+          </Button>
+          <Button
+            component={Link}
+            to="/admin"
+            variant="contained"
+            // color="primary"
+            // sx={{ mt: 2 }}
+          >
+            Admin page
+          </Button>
+          <Button
+            component={Link}
+            to="/linkpage"
+            variant="contained"
+            // color="primary"
+            // sx={{ mt: 2 }}
+          >
+            link page
+          </Button>
 
-      <Button component={Link} to="/" variant="contained">
-        Log Out
-      </Button>
+          <div className="flewGrow">
+            <button onClick={signOut}>Sign out</button>
+          </div>
+
+          {/* TODO: Make actually log out */}
+          <Button component={Link} to="/" variant="contained" color="error">
+            Log Out
+          </Button>
+        </Box>
+      </Stack>
     </Card>
   );
 };

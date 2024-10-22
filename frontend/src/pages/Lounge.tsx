@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+// React Imports
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 // Material UI Imports
@@ -29,13 +30,25 @@ import { useMediaQuery, useTheme } from "@mui/material";
 const Lounge = () => {
   return (
     <Card>
-      <Typography component="h1">The Lounge</Typography>
-      <Typography component="h2">
-        Admins and Editors can hang out here.
-      </Typography>
-      <Box className="flexGrow">
-        <Link to="/">Home</Link>
-      </Box>
+      <Stack>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            // width: "100%",
+            gap: 2,
+            padding: 4,
+          }}
+        >
+          <Typography component="h1" variant="h4">The Lounge</Typography>
+          <Typography component="h2">
+            Admins and Editors can hang out here.
+          </Typography>
+          <Box className="flexGrow">
+            <Link to="/">Home</Link>
+          </Box>
+        </Box>
+      </Stack>
     </Card>
   );
 };

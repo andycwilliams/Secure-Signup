@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+// React Imports
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 // Material UI Imports
@@ -31,11 +32,25 @@ import Users from "../components/Users";
 const Admin = () => {
   return (
     <Card>
-      <Typography component="h1">Admins Page</Typography>
-      <Users />
-      <Box className="flexGrow">
-        <Link to="/">Home</Link>
-      </Box>
+      <Stack>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            // width: "100%",
+            gap: 2,
+            padding: 4,
+          }}
+        >
+          <Typography component="h1" variant="h4">
+            Admins Page
+          </Typography>
+          <Users />
+          <Button component={Link} to="/" variant="contained">
+            Home
+          </Button>
+        </Box>
+      </Stack>
     </Card>
   );
 };

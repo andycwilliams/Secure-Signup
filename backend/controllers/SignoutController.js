@@ -27,11 +27,6 @@ signoutController.get("/", async (req, res) => {
   console.log("result:");
   console.log(result);
 
-  // const otherUsers = await UserModel.find(
-  // (user) => user.refreshToken !== foundUser.refreshToken
-  // );
-  // const currentUser = { ...foundUser, refreshToken: "" };
-
   res.clearCookie("jwt", { httpOnly: true, sameSite: "None", secure: true });
   res.sendStatus(204);
 

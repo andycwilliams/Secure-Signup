@@ -1,8 +1,10 @@
+// React Imports
 import { Route, Routes } from "react-router-dom";
 // Material UI Imports
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 // Component Imports
+import PersistLogin from "./components/PersistLogin";
 import RequireAuth from "./components/RequireAuth";
 // Pages Imports
 import Admin from "./pages/Admin";
@@ -30,7 +32,6 @@ const App = () => {
       <CssBaseline />
       <ThemeProvider theme={getTheme("light")}>
         {/* <BrowserRouter> */}
-        {/* <Layout /> */}
         <Routes>
           <Route path="/" element={<Layout />}>
             {/* Public routes */}
@@ -38,23 +39,27 @@ const App = () => {
             <Route path="/signin" element={<SignIn />} />
             <Route path="/linkpage" element={<LinkPage />} />
             <Route path="/unauthorized" element={<NoPageFound />} />
+
             {/* Protected routes */}
-            <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
-              <Route path="/" element={<Home />} />
+            <Route element={<PersistLogin />}>
+              <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
+                <Route path="/" element={<Home />} />
+              </Route>
+              <Route element={<RequireAuth allowedRoles={[ROLES.Editor]} />}>
+                <Route path="editors" element={<Editor />} />
+              </Route>
+              <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+                <Route path="admin" element={<Admin />} />
+              </Route>
+              <Route
+                element={
+                  <RequireAuth allowedRoles={[ROLES.Editor, ROLES.Admin]} />
+                }
+              >
+                <Route path="lounge" element={<Lounge />} />
+              </Route>
             </Route>
-            <Route element={<RequireAuth allowedRoles={[ROLES.Editor]} />}>
-              <Route path="editors" element={<Editor />} />
-            </Route>
-            <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
-              <Route path="admin" element={<Admin />} />
-            </Route>
-            <Route
-              element={
-                <RequireAuth allowedRoles={[ROLES.Editor, ROLES.Admin]} />
-              }
-            >
-              <Route path="lounge" element={<Lounge />} />
-            </Route>
+
             {/* 404 */}
             <Route path="*" element={<NoPageFound />} />
           </Route>

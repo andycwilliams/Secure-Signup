@@ -29,7 +29,7 @@ refreshTokenController.get("/", async (req, res) => {
         },
       },
       process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "60s" } // Good for testing, production should be longer (e.g. 15 minutes or more)
+      { expiresIn: "15m" } // 60s is good for testing, production should be longer (e.g. 15 minutes or more)
     );
     res.json({ roles, accessToken });
   });
