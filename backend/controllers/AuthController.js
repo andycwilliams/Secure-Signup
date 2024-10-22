@@ -35,7 +35,7 @@ authController.post("/", async (req, res) => {
         },
       },
       process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "60m" }
+      { expiresIn: "10s" }
     );
     console.log("Access token: ", accessToken);
     // No need to send roles in the refresh token
@@ -43,7 +43,7 @@ authController.post("/", async (req, res) => {
     const refreshToken = jwt.sign(
       { username: foundUser.username },
       process.env.REFRESH_TOKEN_SECRET,
-      { expiresIn: "1d" }
+      { expiresIn: "15s" }
     );
     console.log("Refresh token: ", refreshToken);
 

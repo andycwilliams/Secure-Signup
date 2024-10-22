@@ -32,9 +32,11 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useMediaQuery, useTheme } from "@mui/material";
-//
+// Hooks Imports
 // import AuthContext from "../context/AuthProvider";
 import useAuth from "../hooks/useAuth";
+import useInput from "../hooks/useInput";
+import useToggle from "../hooks/useToggle";
 // Axios Imports
 import axios from "../api/axios";
 
@@ -43,18 +45,24 @@ const LOGIN_URL = "/auth";
 
 const SignIn: React.FC = () => {
   // TODO: Replace below quick fix ("as any") with actual solution
-  const { setAuth } = useAuth() as any;
+  const {
+    setAuth,
+    // persist,
+    // setPersist
+  } = useAuth() as any;
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
-  const [username, setUsername] = useState("TestNewAccountAlsoAnAdmin");
+  const userRef = useRef<HTMLParagraphElement>(null);
+  const errRef = useRef<HTMLParagraphElement>(null);
+
+  const [username, resetUser, userAttributes] = useInput("user", "");
+  // const [username, setUsername] = useState("TestNewAccountAlsoAnAdmin");
   const [password, setPassword] = useState("TestAccount#12345@");
   const [errMsg, setErrMsg] = useState("");
   // const [success, setSuccess] = useState(false);
-
-  const userRef = useRef<HTMLParagraphElement>(null);
-  const errRef = useRef<HTMLParagraphElement>(null);
+  const [check, toggleCheck] = useToggle("persist", false);
 
   useEffect(() => {
     userRef.current?.focus();
@@ -64,9 +72,9 @@ const SignIn: React.FC = () => {
     setErrMsg("");
   }, [username, password]);
 
-  const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUsername(e.target.value);
-  };
+  // const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // setUsername(e.target.value);
+  // };
 
   const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
@@ -90,7 +98,7 @@ const SignIn: React.FC = () => {
       const accessToken = response?.data?.accessToken;
       const roles = response?.data?.roles;
       setAuth({ username, password, roles, accessToken });
-      setUsername("");
+      resetUser();
       setPassword("");
       // setSuccess(true);
       navigate(from, { replace: true });
@@ -108,6 +116,14 @@ const SignIn: React.FC = () => {
       // errRef.current.focus();
     }
   };
+
+  // const togglePersist = () => {
+  //   setPersist((prev: Boolean) => !prev);
+  // };
+
+  // useEffect(() => {
+  //   localStorage.setItem("persist", persist);
+  // }, [persist]);
 
   return (
     <Card variant="outlined">
@@ -135,8 +151,9 @@ const SignIn: React.FC = () => {
               label="Username"
               placeholder="Enter your username..."
               variant="outlined"
-              value={username}
-              onChange={handleUsernameChange}
+              {...userAttributes}
+              // value={username}
+              // onChange={handleUsernameChange}
               required
               autoComplete="username"
             />
@@ -157,6 +174,15 @@ const SignIn: React.FC = () => {
           <Button type="submit" variant="contained" color="primary">
             Sign In
           </Button>
+          <div className="">
+            <input
+              type="checkbox"
+              id=""
+              onChange={toggleCheck}
+              checked={check}
+            />
+            <label htmlFor="persist"> Trust this device</label>
+          </div>
           <Button>Create an account</Button>
           {/* TODO: Remove below after tests */}
           <Box>

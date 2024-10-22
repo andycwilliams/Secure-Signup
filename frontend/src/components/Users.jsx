@@ -1,6 +1,8 @@
-import { useState, useEffect } from "react";
+// React Imports
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+// Hooks Imports
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
-import { useNavigate, useLocation } from "react-router-dom";
 
 const Users = () => {
   const [users, setUsers] = useState();
@@ -17,7 +19,7 @@ const Users = () => {
         const response = await axiosPrivate.get("/users", {
           signal: controller.signal,
         });
-        console.log(response.data);
+        // console.log(response.data);
         isMounted && setUsers(response.data);
       } catch (err) {
         console.error(err);
@@ -31,7 +33,7 @@ const Users = () => {
       isMounted = false;
       controller.abort();
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
