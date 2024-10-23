@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // React Imports
-import React, { useState } from "react";
 import { Link } from "react-router-dom";
 // Material UI Imports
 import Avatar from "@mui/material/Avatar";
@@ -26,7 +25,7 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useMediaQuery, useTheme } from "@mui/material";
-
+// Components Imports
 import Users from "../components/Users";
 
 const Admin = () => {
@@ -40,11 +39,13 @@ const Admin = () => {
             // width: "100%",
             gap: 2,
             padding: 4,
+            alignItems: "center",
           }}
         >
           <Typography component="h1" variant="h4">
             Admins Page
           </Typography>
+          <Typography>Only assigned admins can view this page.</Typography>
           <Users />
           <Button component={Link} to="/" variant="contained">
             Home

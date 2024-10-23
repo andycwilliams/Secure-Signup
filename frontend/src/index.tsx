@@ -1,10 +1,13 @@
+// React Imports
 import ReactDOM from "react-dom/client";
+import { BrowserRouter as Router } from "react-router-dom";
 // import "./index.css";
+// Component Imports
 import App from "./App";
 // import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter as Router } from "react-router-dom";
+// Context Imports
 import { AuthProvider } from "./context/AuthProvider";
-
+// Dependency Imports
 import { disableReactDevTools } from "@fvilers/disable-react-devtools";
 
 if (process.env.NODE_ENV === "production") {

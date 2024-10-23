@@ -32,6 +32,10 @@ import SearchIcon from "@mui/icons-material/Search";
 import DirectionsIcon from "@mui/icons-material/Directions";
 import InputAdornment from "@mui/material/InputAdornment";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 // Axios Imports
 // import axios, { AxiosError } from "axios";
 import axios from "../api/axios";
@@ -77,20 +81,19 @@ const validatePassword = (password: string): string => {
 };
 
 const SignUp: React.FC = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [isEmailInDatabase, setIsEmailInDatabase] = useState<boolean>(false);
+  const [role, setRole] = React.useState("");
   const [formData, setFormData] = useState({
     username: "ThisIsMyUsername",
     email: "test@email.com",
     password: "Abcd123@",
   });
-
   const [errors, setErrors] = useState({
     username: "",
     email: "",
     password: "",
   });
-
-  const [showPassword, setShowPassword] = useState(false);
-  const [isEmailInDatabase, setIsEmailInDatabase] = useState<boolean>(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -217,6 +220,10 @@ const SignUp: React.FC = () => {
     }
   };
 
+  const handleRoleChange = (event: SelectChangeEvent) => {
+    setRole(event.target.value as string);
+  };
+
   return (
     <Card variant="outlined">
       <Stack>
@@ -232,7 +239,7 @@ const SignUp: React.FC = () => {
             padding: 4,
           }}
         >
-          <Typography component="h1" variant="h4">
+          <Typography component="h1" variant="h4" sx={{ alignSelf: "center" }}>
             Sign up
           </Typography>
           <FormControl>
@@ -270,6 +277,20 @@ const SignUp: React.FC = () => {
               // margin="normal"
             />
           </FormControl>
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Role</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={role}
+              label="Role"
+              onChange={handleRoleChange}
+            >
+              <MenuItem value={101}>User</MenuItem>
+              <MenuItem value={201}>Editor</MenuItem>
+              <MenuItem value={301}>Admin</MenuItem>
+            </Select>
+          </FormControl>
           <FormControl>
             <TextField
               fullWidth
@@ -304,7 +325,6 @@ const SignUp: React.FC = () => {
           <Button type="submit" variant="contained" color="primary">
             Sign Up
           </Button>
-          <Button>I have an account</Button>
           <Typography sx={{ textAlign: "center" }}>
             Already have an account?{" "}
             <span>
@@ -313,7 +333,6 @@ const SignUp: React.FC = () => {
               </Link>
             </span>
           </Typography>
-          {/* TODO: Add select to choose whether to sign up as User, Editor, or Admin */}
         </Box>
       </Stack>
     </Card>

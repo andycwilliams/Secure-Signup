@@ -37,6 +37,7 @@ const LinkPage = () => {
             // width: "100%",
             gap: 2,
             padding: 4,
+            alignItems: "center",
           }}
         >
           <Typography component="h1" variant="h4">
@@ -52,6 +53,7 @@ const LinkPage = () => {
             variant="outlined"
             // color="primary"
             // sx={{ mt: 2 }}
+            fullWidth
           >
             Sign In
           </Button>
@@ -61,6 +63,7 @@ const LinkPage = () => {
             variant="outlined"
             // color="primary"
             // sx={{ mt: 2 }}
+            fullWidth
           >
             Sign Up
           </Button>
@@ -74,6 +77,7 @@ const LinkPage = () => {
             variant="outlined"
             // color="primary"
             // sx={{ mt: 2 }}
+            fullWidth
           >
             Home
           </Button>
@@ -83,6 +87,7 @@ const LinkPage = () => {
             variant="outlined"
             // color="primary"
             // sx={{ mt: 2 }}
+            fullWidth
           >
             Editors Page
           </Button>
@@ -92,6 +97,7 @@ const LinkPage = () => {
             variant="outlined"
             // color="primary"
             // sx={{ mt: 2 }}
+            fullWidth
           >
             Admin Page
           </Button>

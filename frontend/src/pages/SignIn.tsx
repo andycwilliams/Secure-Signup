@@ -21,6 +21,7 @@ import Divider from "@mui/material/Divider";
 import Fade from "@mui/material/Fade";
 import FormControl from "@mui/material/FormControl";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import FormGroup from "@mui/material/FormGroup";
 import FormLabel from "@mui/material/FormLabel";
 import Grid from "@mui/material/Grid";
 // import Link from "@mui/material/Link";
@@ -175,7 +176,7 @@ const SignIn: React.FC = () => {
           <Button type="submit" variant="contained" color="primary">
             Sign In
           </Button>
-          <div className="">
+          {/* <div className="">
             <input
               type="checkbox"
               id=""
@@ -183,19 +184,16 @@ const SignIn: React.FC = () => {
               checked={check}
             />
             <label htmlFor="persist"> Trust this device</label>
-          </div>
+          </div> */}
+          <FormGroup>
+            <FormControlLabel
+              control={<Checkbox />}
+              onChange={toggleCheck}
+              checked={check}
+              label="Trust this device"
+            />
+          </FormGroup>
           <Button>Create an account</Button>
-          {/* TODO: Remove below after tests */}
-          <Box>
-            <p
-              ref={errRef}
-              className={errMsg ? "errmsg" : "offscreen"}
-              aria-live="assertive"
-            >
-              vvvv
-              {errMsg}^^^^
-            </p>
-          </Box>
         </Box>
       </Stack>
     </Card>
