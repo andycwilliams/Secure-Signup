@@ -313,6 +313,7 @@ const SignUp: React.FC = () => {
               </Link>
             </span>
           </Typography>
+          {/* TODO: Add select to choose whether to sign up as User, Editor, or Admin */}
         </Box>
       </Stack>
     </Card>

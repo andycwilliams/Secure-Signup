@@ -63,7 +63,8 @@ authController.post("/", async (req, res) => {
       maxAge: 24 * 60 * 60 * 1000,
     });
 
-    res.json({ roles, accessToken });
+    // Previously sent roles as well, but now that is redundant
+    res.json({ accessToken });
   } else {
     res.sendStatus(401);
     console.log("Login unsuccessful...");

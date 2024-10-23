@@ -2,7 +2,7 @@
 // React Imports
 import React, { useContext, useEffect, useRef, useState } from "react";
 import {
-  Link as ReactRouterLink,
+  // Link as ReactRouterLink,
   useLocation,
   useNavigate,
 } from "react-router-dom";
@@ -96,8 +96,9 @@ const SignIn: React.FC = () => {
       );
       console.log(JSON.stringify(response?.data));
       const accessToken = response?.data?.accessToken;
-      const roles = response?.data?.roles;
-      setAuth({ username, password, roles, accessToken });
+      // const roles = response?.data?.roles;
+      // setAuth({ username, password, roles, accessToken }); // Do we really need all of these in the state? We need roles and accessToken, the user is handy, but the password is not necessary to store there. Nor are the roles
+      setAuth({ username, accessToken });
       resetUser();
       setPassword("");
       // setSuccess(true);
