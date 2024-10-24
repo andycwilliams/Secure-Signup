@@ -43,9 +43,11 @@ const Admin = () => {
           }}
         >
           <Typography component="h1" variant="h4">
-            Admins Page
+            Admin Page
           </Typography>
-          <Typography>Only assigned admins can view this page.</Typography>
+          <Typography component="h2">
+            You must be assigned the Admin role to view this page.
+          </Typography>
           <Users />
           <Button component={Link} to="/" variant="contained">
             Home

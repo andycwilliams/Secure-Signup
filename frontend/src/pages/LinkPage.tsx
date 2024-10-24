@@ -47,58 +47,23 @@ const LinkPage = () => {
             Public
           </Typography>
 
-          <Button
-            component={Link}
-            to="/signin"
-            variant="outlined"
-            // color="primary"
-            // sx={{ mt: 2 }}
-            fullWidth
-          >
+          <Button component={Link} to="/signin" variant="outlined" fullWidth>
             Sign In
           </Button>
-          <Button
-            component={Link}
-            to="/signup"
-            variant="outlined"
-            // color="primary"
-            // sx={{ mt: 2 }}
-            fullWidth
-          >
+          <Button component={Link} to="/signup" variant="outlined" fullWidth>
             Sign Up
           </Button>
 
           <Typography component="h2" variant="h5">
             Private
           </Typography>
-          <Button
-            component={Link}
-            to="/"
-            variant="outlined"
-            // color="primary"
-            // sx={{ mt: 2 }}
-            fullWidth
-          >
+          <Button component={Link} to="/" variant="outlined" fullWidth>
             Home
           </Button>
-          <Button
-            component={Link}
-            to="/editors"
-            variant="outlined"
-            // color="primary"
-            // sx={{ mt: 2 }}
-            fullWidth
-          >
+          <Button component={Link} to="/editors" variant="outlined" fullWidth>
             Editors Page
           </Button>
-          <Button
-            component={Link}
-            to="/admin"
-            variant="outlined"
-            // color="primary"
-            // sx={{ mt: 2 }}
-            fullWidth
-          >
+          <Button component={Link} to="/admin" variant="outlined" fullWidth>
             Admin Page
           </Button>
         </Box>

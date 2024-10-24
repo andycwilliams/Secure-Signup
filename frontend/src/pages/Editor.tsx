@@ -38,17 +38,18 @@ const Editor = () => {
             // width: "100%",
             gap: 2,
             padding: 4,
+            alignItems: "center",
           }}
         >
           <Typography component="h1" variant="h4">
-            Editors Page
+            Editor Page
           </Typography>
           <Typography component="h2">
-            You must have been assigned an Editor role.
+            You must be assigned the Editor role to view this page.
           </Typography>
-          <Box className="flexGrow">
-            <Link to="/">Home</Link>
-          </Box>
+          <Button component={Link} to="/" variant="outlined" fullWidth>
+            Home
+          </Button>
         </Box>
       </Stack>
     </Card>

@@ -54,58 +54,30 @@ export const Home: React.FC = () => {
             // width: "100%",
             gap: 2,
             padding: 4,
+            alignItems: "center",
           }}
         >
           <Typography component="h1" variant="h4">
             Home
           </Typography>
 
-          <Typography>You are logged in!</Typography>
+          <Typography component="h2">You are logged in!</Typography>
 
-          <Button
-            component={Link}
-            to="/lounge"
-            variant="contained"
-            // color="primary"
-            // sx={{ mt: 2 }}
-          >
+          <Button component={Link} to="/lounge" variant="outlined" fullWidth>
             Lounge
           </Button>
-          <Button
-            component={Link}
-            to="/editor"
-            variant="contained"
-            // color="primary"
-            // sx={{ mt: 2 }}
-          >
+          <Button component={Link} to="/editors" variant="outlined" fullWidth>
             Editor page
           </Button>
-          <Button
-            component={Link}
-            to="/admin"
-            variant="contained"
-            // color="primary"
-            // sx={{ mt: 2 }}
-          >
+          <Button component={Link} to="/admin" variant="outlined" fullWidth>
             Admin page
           </Button>
-          <Button
-            component={Link}
-            to="/linkpage"
-            variant="contained"
-            // color="primary"
-            // sx={{ mt: 2 }}
-          >
-            link page
+          <Button component={Link} to="/linkpage" variant="outlined" fullWidth>
+            Link page
           </Button>
 
-          <div className="flewGrow">
-            <button onClick={signOut}>Sign out</button>
-          </div>
-
-          {/* TODO: Make actually log out */}
-          <Button component={Link} to="/" variant="contained" color="error">
-            Log Out
+          <Button variant="outlined" color="error" fullWidth onClick={signOut}>
+            Sign Out
           </Button>
         </Box>
       </Stack>

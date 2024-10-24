@@ -1,43 +1,20 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
 // Material UI Imports
-import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Checkbox from "@mui/material/Checkbox";
-import Chip from "@mui/material/Chip";
-import Container from "@mui/material/Container";
-import Divider from "@mui/material/Divider";
-import Fade from "@mui/material/Fade";
 import FormControl from "@mui/material/FormControl";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormLabel from "@mui/material/FormLabel";
-import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import { useMediaQuery, useTheme } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
-import DirectionsIcon from "@mui/icons-material/Directions";
 import InputAdornment from "@mui/material/InputAdornment";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 // Axios Imports
-// import axios, { AxiosError } from "axios";
 import axios from "../api/axios";
 
 const USERS_URL = "/users";
@@ -140,7 +117,6 @@ const SignUp: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     const usernameError = validateUsername(formData.username);
     const emailError = validateEmail(formData.email);
     const passwordError = validatePassword(formData.password);
@@ -234,17 +210,16 @@ const SignUp: React.FC = () => {
           sx={{
             display: "flex",
             flexDirection: "column",
-            // width: "100%",
             gap: 2,
             padding: 4,
+            alignItems: "center",
           }}
         >
-          <Typography component="h1" variant="h4" sx={{ alignSelf: "center" }}>
+          <Typography component="h1" variant="h4">
             Sign up
           </Typography>
-          <FormControl>
+          <FormControl fullWidth>
             <TextField
-              fullWidth
               id="register-username"
               name="username"
               label="Username"
@@ -256,12 +231,10 @@ const SignUp: React.FC = () => {
               helperText={errors.username}
               required
               autoComplete="username"
-              // margin="normal"
             />
           </FormControl>
-          <FormControl>
+          <FormControl fullWidth>
             <TextField
-              fullWidth
               id="register-email"
               name="email"
               label="Email"
@@ -274,7 +247,6 @@ const SignUp: React.FC = () => {
               helperText={errors.email}
               required
               autoComplete="email"
-              // margin="normal"
             />
           </FormControl>
           <FormControl fullWidth>
@@ -305,7 +277,6 @@ const SignUp: React.FC = () => {
               error={Boolean(errors.password)}
               helperText={errors.password}
               required
-              // margin="normal"
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
@@ -322,16 +293,11 @@ const SignUp: React.FC = () => {
               }}
             />
           </FormControl>
-          <Button type="submit" variant="contained" color="primary">
+          <Button type="submit" variant="contained" color="primary" fullWidth>
             Sign Up
           </Button>
-          <Typography sx={{ textAlign: "center" }}>
-            Already have an account?{" "}
-            <span>
-              <Link href="/signin" variant="body2" sx={{ alignSelf: "center" }}>
-                Sign in
-              </Link>
-            </span>
+          <Typography>
+            Already have an account? <Link href="/signin">Sign in</Link>
           </Typography>
         </Box>
       </Stack>
