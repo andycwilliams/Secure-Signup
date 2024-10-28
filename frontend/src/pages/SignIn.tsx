@@ -1,10 +1,6 @@
 // React Imports
 import React, { useEffect, useRef, useState } from "react";
-import {
-  // Link as ReactRouterLink,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 // Material UI Imports
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -13,10 +9,14 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControl from "@mui/material/FormControl";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormGroup from "@mui/material/FormGroup";
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 // Hooks Imports
 import useAuth from "../hooks/useAuth";
 import useInput from "../hooks/useInput";
@@ -24,22 +24,16 @@ import useToggle from "../hooks/useToggle";
 // Axios Imports
 import axios from "../api/axios";
 
-// const LOGIN_URL = "/users/login";
 const LOGIN_URL = "/auth";
 
 const SignIn: React.FC = () => {
   // TODO: Replace below quick fix ("as any") with actual solution
-  const {
-    setAuth,
-    // persist,
-    // setPersist
-  } = useAuth() as any;
+  const { setAuth } = useAuth() as any;
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
   const userRef = useRef<HTMLParagraphElement>(null);
-  const errRef = useRef<HTMLParagraphElement>(null);
 
   const [username, resetUser, userAttributes] = useInput("user", "");
   // const [username, setUsername] = useState("TestNewAccountAlsoAnAdmin");
@@ -47,6 +41,7 @@ const SignIn: React.FC = () => {
   const [errMsg, setErrMsg] = useState("");
   // const [success, setSuccess] = useState(false);
   const [check, toggleCheck] = useToggle("persist", false);
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     userRef.current?.focus();
@@ -62,6 +57,12 @@ const SignIn: React.FC = () => {
 
   const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
+  };
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -102,25 +103,16 @@ const SignIn: React.FC = () => {
     }
   };
 
-  // const togglePersist = () => {
-  //   setPersist((prev: Boolean) => !prev);
-  // };
-
-  // useEffect(() => {
-  //   localStorage.setItem("persist", persist);
-  // }, [persist]);
-
   return (
     <Card variant="outlined">
       <Stack>
         <Box
           component="form"
           onSubmit={handleSubmit}
-          // noValidate
           sx={{
             display: "flex",
             flexDirection: "column",
-    
+
             gap: 2,
             padding: 4,
             alignItems: "center",
@@ -137,7 +129,6 @@ const SignIn: React.FC = () => {
               placeholder="Enter your username..."
               variant="outlined"
               {...userAttributes}
-
               required
               autoComplete="username"
             />
@@ -147,25 +138,31 @@ const SignIn: React.FC = () => {
               id="password"
               name="password"
               label="Password"
+              type={showPassword ? "text" : "password"}
               placeholder="Enter your password..."
               variant="outlined"
               value={password}
               onChange={handlePassword}
               required
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
             />
           </FormControl>
           <Button type="submit" variant="contained" color="primary" fullWidth>
             Sign In
           </Button>
-          {/* <div className="">
-            <input
-              type="checkbox"
-              id=""
-              onChange={toggleCheck}
-              checked={check}
-            />
-            <label htmlFor="persist"> Trust this device</label>
-          </div> */}
           <FormGroup>
             <FormControlLabel
               control={<Checkbox />}
@@ -174,7 +171,7 @@ const SignIn: React.FC = () => {
               label="Trust this device"
             />
           </FormGroup>
-          <Typography>
+          <Typography sx={{ color: "text.secondary" }}>
             Don't have an account? <Link href="/signup">Create one</Link>
           </Typography>
         </Box>

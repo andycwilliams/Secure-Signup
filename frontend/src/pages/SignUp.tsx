@@ -1,20 +1,22 @@
+// React Imports
 import React, { useState } from "react";
 // Material UI Imports
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import FormControl from "@mui/material/FormControl";
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
+import InputLabel from "@mui/material/InputLabel";
 import Link from "@mui/material/Link";
+import MenuItem from "@mui/material/MenuItem";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
-import InputAdornment from "@mui/material/InputAdornment";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-// Axios Imports
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+// Dependency Imports
 import axios from "../api/axios";
 
 const USERS_URL = "/users";
@@ -58,7 +60,7 @@ const validatePassword = (password: string): string => {
 };
 
 const SignUp: React.FC = () => {
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const [isEmailInDatabase, setIsEmailInDatabase] = useState<boolean>(false);
   const [role, setRole] = React.useState("");
   const [formData, setFormData] = useState({
@@ -299,7 +301,7 @@ const SignUp: React.FC = () => {
           <Button type="submit" variant="contained" color="primary" fullWidth>
             Sign Up
           </Button>
-          <Typography>
+          <Typography sx={{ color: "text.secondary" }}>
             Already have an account? <Link href="/signin">Sign in</Link>
           </Typography>
         </Box>
