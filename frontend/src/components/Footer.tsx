@@ -11,10 +11,7 @@ import Typography from "@mui/material/Typography";
 
 const Copyright = () => {
   return (
-    <Typography
-      variant="body2"
-      // sx={{ color: "text.secondary", mt: 1 }}
-    >
+    <Typography variant="body2" sx={{ color: "text.secondary", my: 1 }}>
       {"Copyright © "}
       <Link color="text.secondary" href="/">
         Secure Signin
@@ -34,23 +31,17 @@ const Footer: React.FC = () => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          // gap: { xs: 4, sm: 8 },
-          // py: { xs: 8, sm: 5 },
-          // textAlign: { sm: "center", md: "left" },
+          gap: { xs: 4, sm: 8 },
+          py: { xs: 4, sm: 4 },
+          textAlign: { sm: "center", md: "left" },
         }}
       >
-        <Stack direction="column">
-          <Stack
-            direction="row"
-            // spacing={1}
-            // useFlexGap
-          >
+        <Stack direction="column" sx={{ alignItems: "center" }}>
+          <Stack direction="row">
             <Link color="text.secondary" variant="body2" href="#">
               Privacy Policy
             </Link>
-            <Typography
-            // sx={{ display: "inline", mx: 0.5, opacity: 0.5 }}
-            >
+            <Typography sx={{ display: "inline", mx: 0.5, opacity: 0.5 }}>
               &nbsp;•&nbsp;
             </Typography>
             <Link color="text.secondary" variant="body2" href="#">
@@ -60,19 +51,17 @@ const Footer: React.FC = () => {
           <Copyright />
           <Stack
             direction="row"
-            // spacing={1}
-            // useFlexGap
-            // sx={{
-            //   justifyContent: "left",
-            //   color: "text.secondary",
-            // }}
+            spacing={1}
+            sx={{
+              // justifyContent: "left",
+              color: "text.secondary",
+            }}
           >
             <IconButton
               color="inherit"
               size="small"
               href="https://github.com/"
               aria-label="GitHub"
-              // sx={{ alignSelf: "center" }}
             >
               <FacebookIcon />
             </IconButton>
@@ -81,7 +70,6 @@ const Footer: React.FC = () => {
               size="small"
               href="https://x.com/"
               aria-label="X"
-              // sx={{ alignSelf: "center" }}
             >
               <TwitterIcon />
             </IconButton>
@@ -90,7 +78,6 @@ const Footer: React.FC = () => {
               size="small"
               href="https://www.linkedin.com/"
               aria-label="LinkedIn"
-              // sx={{ alignSelf: "center" }}
             >
               <LinkedInIcon />
             </IconButton>

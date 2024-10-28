@@ -63,6 +63,7 @@ const SignUp: React.FC = () => {
   const [role, setRole] = React.useState("");
   const [formData, setFormData] = useState({
     username: "ThisIsMyUsername",
+    role: 301,
     email: "test@email.com",
     password: "Abcd123@",
   });
@@ -121,6 +122,8 @@ const SignUp: React.FC = () => {
     const emailError = validateEmail(formData.email);
     const passwordError = validatePassword(formData.password);
 
+    console.log(formData);
+
     // Can add a means here to prevent accessing this from a JS hack
     // Here's a solution from "React JS Form Validation | Axios User Registration Form Submit | Beginners to Intermediate"
     // though it does not work here:
@@ -177,7 +180,7 @@ const SignUp: React.FC = () => {
       console.log("Account created successfully:", response.data);
       console.log(JSON.stringify(response?.data));
 
-      setFormData({ username: "", email: "", password: "" });
+      setFormData({ username: "", role: 101, email: "", password: "" });
       setErrors({ username: "", email: "", password: "" });
     } catch (err: any) {
       if (!err?.response) {
@@ -234,6 +237,21 @@ const SignUp: React.FC = () => {
             />
           </FormControl>
           <FormControl fullWidth>
+            <InputLabel id="register-role-label">Role</InputLabel>
+            <Select
+              labelId="register-role-label"
+              id="register-role"
+              name="Role"
+              label="Role"
+              value={role}
+              onChange={handleRoleChange}
+            >
+              <MenuItem value={101}>User</MenuItem>
+              <MenuItem value={201}>Editor</MenuItem>
+              <MenuItem value={301}>Admin</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl fullWidth>
             <TextField
               id="register-email"
               name="email"
@@ -250,22 +268,7 @@ const SignUp: React.FC = () => {
             />
           </FormControl>
           <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Role</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={role}
-              label="Role"
-              onChange={handleRoleChange}
-            >
-              <MenuItem value={101}>User</MenuItem>
-              <MenuItem value={201}>Editor</MenuItem>
-              <MenuItem value={301}>Admin</MenuItem>
-            </Select>
-          </FormControl>
-          <FormControl>
             <TextField
-              fullWidth
               id="register-password"
               name="password"
               label="Password"
