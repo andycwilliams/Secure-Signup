@@ -15,7 +15,6 @@ const LinkPage = () => {
           sx={{
             display: "flex",
             flexDirection: "column",
-            // width: "100%",
             gap: 2,
             padding: 4,
             alignItems: "center",

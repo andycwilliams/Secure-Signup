@@ -7,6 +7,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
+// import Link from "@mui/material/Link";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -14,7 +15,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { useMediaQuery, useTheme } from "@mui/material";
 
-const navLinks = {};
+// const navLinks = {};
 
 const Navbar: React.FC = () => {
   // const [auth, setAuth] = useState(true);
@@ -35,15 +36,13 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <Box
-    // sx={{ flexGrow: 1 }}
-    // sx={{ display: "flex" }}
-    >
+    <Box>
       <AppBar position="static" component="nav">
         <Toolbar>
           <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
             Secure Signup
           </Typography>
+
           {/* Desktop navbar */}
           {!isSmallScreen ? (
             <>

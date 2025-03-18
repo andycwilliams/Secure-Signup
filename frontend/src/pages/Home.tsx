@@ -11,12 +11,10 @@ import Typography from "@mui/material/Typography";
 import useLogout from "../hooks/useLogout";
 
 export const Home: React.FC = () => {
-  // const { setAuth } = useContext(AuthContext) as any;
   const navigate = useNavigate();
   const logout = useLogout();
 
   const signOut = async () => {
-    // setAuth({});
     await logout();
     navigate("/linkpage");
   };
@@ -28,7 +26,6 @@ export const Home: React.FC = () => {
           sx={{
             display: "flex",
             flexDirection: "column",
-            // width: "100%",
             gap: 2,
             padding: 4,
             alignItems: "center",
